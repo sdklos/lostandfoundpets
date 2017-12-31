@@ -2,6 +2,9 @@
   <% if flash[:alert] %>
     <div><%= flash[:alert] %></div>
   <% end %>
+  <% if flash[:notice] %>
+    <div><%= flash[:notice] %></div>
+  <% end %>
 
     <ul>
         <% unless current_page?(root_path) %>
