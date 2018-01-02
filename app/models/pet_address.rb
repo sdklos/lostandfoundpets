@@ -1,0 +1,2 @@
+class PetAddress < ApplicationRecord
+end
