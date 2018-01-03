@@ -22,6 +22,8 @@ gem 'devise'
 gem 'omniauth-facebook'
 gem 'dotenv-rails'
 gem 'geocoder'
+gem 'jquery-rails'
+gem 'petfinder'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
