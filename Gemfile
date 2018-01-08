@@ -25,6 +25,7 @@ gem 'geocoder'
 gem 'jquery-rails'
 gem 'petfinder'
 gem 'active_model_serializers'
+gem "paperclip", "~> 5.0.0"
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
