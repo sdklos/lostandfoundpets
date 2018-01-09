@@ -1,0 +1,2 @@
+class BirdBreed < ApplicationRecord
+end

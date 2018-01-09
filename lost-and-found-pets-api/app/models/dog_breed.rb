@@ -1,0 +1,3 @@
+class DogBreed < ApplicationRecord
+
+end
