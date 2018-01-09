@@ -1,3 +1,0 @@
-class DogBreed < ApplicationRecord
-
-end
