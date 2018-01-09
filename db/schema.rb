@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180108225806) do
+ActiveRecord::Schema.define(version: 20180109233951) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 20180108225806) do
   create_table "pets", force: :cascade do |t|
     t.boolean "lost"
     t.boolean "found"
-    t.string "type"
+    t.string "pet_type"
     t.string "primary_breed"
     t.string "secondary_breed"
     t.string "primary_color"
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 20180108225806) do
     t.string "picture_content_type"
     t.integer "picture_file_size"
     t.datetime "picture_updated_at"
+    t.string "age"
   end
 
   create_table "users", force: :cascade do |t|
