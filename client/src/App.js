@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { connect } from 'react-redux';
 import './App.css';
 import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
 
@@ -20,4 +20,8 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return { pets: state.pets };
+};
+
+export default connect(mapStateToProps)(App);
