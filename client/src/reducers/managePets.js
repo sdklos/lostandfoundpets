@@ -1,4 +1,4 @@
-export default function managePets(state = { pets: [],
+export default function managePets(state = { pets: [], filtered_pets: []
 }, action) {
   switch(action.type) {
     case 'ADD_PET':
