@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './App.css';
-import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, NavLink } from 'react-router-dom';
 import NavBar from '../src/components/NavBar';
-import NewPet from '../src/components/NewPet';
-import PetsPage from '../src/containers/PetsContainer';
+import NewPetContainer from '../src/containers/NewPetContainer';
+import PetsContainer from '../src/containers/PetsContainer';
+import PetShow from '../src/components/PetShow';
 
 class App extends Component {
   render() {
@@ -21,8 +22,11 @@ class App extends Component {
           </Router>
         </header>
         <body>
-          <Route exact path="/" render={PetsContainer} />
-          <Route exact path="/add" render={NewPet} />
+          <Switch>
+            <Route exact path="/" render={PetsContainer} />
+            <Route exact path="/add" render={NewPet} />
+            <Route exact path="/pets/{this.props.petId}" render={PetShow} />
+          </Switch>
         </body>
 
       </div>
@@ -31,7 +35,7 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { pets: state.pets };
+  return { petId: state.selectedPetId };
 };
 
 export default connect(mapStateToProps)(App);
