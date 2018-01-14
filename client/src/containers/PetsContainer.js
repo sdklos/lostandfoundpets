@@ -10,9 +10,20 @@ class PetsContainer extends Component {
     return (
       <div>
         <h1>Search for Pets</h1>
-
+        <GetLocation />
+        <FilterPets />
+        <ShowPets />
       </div>
     )}
 };
 
-export default PetsContainer
+const mapStateToProps = state => {
+  return {
+    pets: state.pets,
+    petId: state.petId,
+    location: state.location,
+    radius: state.radius
+  };
+}
+
+export default connect(mapStateToProps)(PetsContainer);

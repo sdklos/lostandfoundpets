@@ -8,10 +8,10 @@
 /.bundle
 
 # Ignore all logfiles and tempfiles.
-/lost-and-found-pets-api/log/*
-/lost-and-found-pets-api/tmp/*
-!/lost-and-found-pets-api/log/.keep
-!/lost-and-found-pets-api/tmp/.keep
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
 
 /node_modules
 /yarn-error.log

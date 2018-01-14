@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import NewPetContainer from './containers/NewPetContainer';
 import PetsContainer from './containers/PetsContainer';
 import PetShow from './components/PetShow';
 
-export default class App extends Component {
+class App extends Component {
   render() {
     return (
-      <div>
-        <header>
+      <div className="App">
+        <header className="App-header">
           <Router>
             <div>
               <NavBar />
@@ -34,3 +35,9 @@ export default class App extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+   return { petId: state.selectedPetId };
+ };
+
+export default connect(mapStateToProps)(App);
