@@ -1,22 +1,22 @@
-export function fetchPets() {
+export const fetchPets = () => {
   // const pets = get pets from the server
   return {
     type: 'FETCH_PETS',
-    pets
+    // pets
   };
 }
 
-export function addPet(pet){
+export const addPet = (pet) => {
   return {
     type: 'ADD_PET',
     pet
   };
 };
 
-export function filterPets() {
+export const filterPetsAction = () => {
 
   return {
     type: 'FILTER_PETS',
-    filtered_pets
+    // filtered_pets
   }
 }
