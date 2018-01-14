@@ -21,7 +21,7 @@ class App extends Component {
             </div>
           </Router>
         </header>
-        <body>
+        <div>
           <Router>
             <Switch>
               <Route exact path="/" component={PetsContainer} />
@@ -29,7 +29,7 @@ class App extends Component {
               <Route exact path="/pets/{this.props.petId}" render={PetShow} />
             </Switch>
           </Router>
-        </body>
+        </div>
 
       </div>
     );
