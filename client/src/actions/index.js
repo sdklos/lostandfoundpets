@@ -1,8 +1,9 @@
-export const fetchPets = () => {
-  // const pets = get pets from the server
-  return {
-    type: 'FETCH_PETS',
-    // pets
+export function fetchPets() {
+  return (dispatch) => {
+    dispatch({ type: 'START_ADDING_PETS_REQUEST' });
+    return fetch()
+    .then(response => response.json())
+    .then(pets => console.log(pets))
   };
 }
 
