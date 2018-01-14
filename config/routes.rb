@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-  resources :addresses
+
   root to: "welcome#welcome"
+
+  resources :addresses
+  resources :pets
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 

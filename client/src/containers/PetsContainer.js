@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { fetchPets } from '../actions/index';
 import GetLocation from '../components/GetLocation.js'
@@ -6,6 +7,10 @@ import FilterPets from '../components/FilterPets.js'
 import ShowPets from '../components/ShowPets.js'
 
 class PetsContainer extends Component {
+  componentDidMount(){
+    this.props.fetchPets()
+  }
+  
   render() {
     return (
       <div>
@@ -26,4 +31,10 @@ const mapStateToProps = state => {
   };
 }
 
-export default connect(mapStateToProps)(PetsContainer);
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    fetchPets: fetchPets
+  }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PetsContainer);
