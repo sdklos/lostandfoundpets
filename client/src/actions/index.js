@@ -2,10 +2,11 @@ import fetch from 'isomorphic-fetch';
 
 export function fetchPets() {
   return (dispatch) => {
-    dispatch({ type: 'START_ADDING_PETS_REQUEST' });
+    dispatch({ type: 'LOADING_PETS' });
     return fetch('/pets.json')
     .then(response => response.json())
-    .then(pets => console.log(pets))
+    .then(pets => {
+    dispatch({type: 'FETCH_PETS', payload: pets })})
   };
 }
 

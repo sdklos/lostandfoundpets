@@ -10,14 +10,14 @@ class PetsContainer extends Component {
   componentDidMount(){
     this.props.fetchPets()
   }
-  
+
   render() {
     return (
       <div>
         <h1>Search for Pets</h1>
         <GetLocation />
         <FilterPets />
-        <ShowPets />
+        <ShowPets pets={this.props.pets} />
       </div>
     )}
 };
