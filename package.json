@@ -1,5 +1,7 @@
 {
   "name": "lostandfoundpets",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "react-places-autocomplete": "^5.4.3"
+  }
 }

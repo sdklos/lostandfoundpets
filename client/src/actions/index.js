@@ -24,3 +24,10 @@ export const filterPetsAction = () => {
     // filtered_pets
   }
 }
+
+export function updateAddress(address) {
+  return {
+    type: 'UPDATE_ADDRESS',
+    payload: address
+  }
+}
