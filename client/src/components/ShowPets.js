@@ -4,7 +4,7 @@ const ShowPets = (props) => {
   function displayCats(){
     return props.pets.map(pet => {
       return (
-        <div>
+        <div key={pet.id}>
           <div>{pet.name}</div>
           <div>{pet.age}</div>
           <div>{pet.contact_phone}</div>
