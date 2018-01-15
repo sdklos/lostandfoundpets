@@ -1,7 +1,8 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const ShowPets = (props) => {
-  function displayCats(){
+  function displayPets(){
     return props.pets.map(pet => {
       return (
         <div key={pet.id}>
@@ -13,12 +14,13 @@ const ShowPets = (props) => {
           <div>{pet.primary_breed}</div>
           <div>{pet.primary_color}</div>
           <div>{pet.sex}</div>
+          <NavLink to="/pets/{pet.id}" exact>View {pet.name}</NavLink>
         </div>
       )
     })
   }
   return (
-    <div>{displayCats()}</div>
+    <div>{displayPets()}</div>
   )
 }
 

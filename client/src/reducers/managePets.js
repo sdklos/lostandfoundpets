@@ -5,6 +5,26 @@ const initialState = {
   address: ''
 }
 
+export const initialPetState = {
+  id: null,
+  lost: null,
+  found: null,
+  petType: '',
+  name: '',
+  primaryBreed: '',
+  secondaryBreed: '',
+  primaryColor: '',
+  secondaryColor: '',
+  sex: '',
+  neutered: null,
+  weight: null,
+  age: '',
+  url: '',
+  ownerName: '',
+  contact_phone: '',
+  contact_email: ''
+}
+
 export default function managePets(state = initialState, action) {
   switch(action.type) {
     case 'LOADING_PETS':

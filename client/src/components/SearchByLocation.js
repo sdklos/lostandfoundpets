@@ -5,7 +5,7 @@ import PlacesAutocomplete from 'react-places-autocomplete';
 import { updateAddress } from '../actions/index';
 import '../App.css';
 
-class GetLocation extends Component {
+class SearchByLocation extends Component {
   constructor(props) {
     super(props)
     this.onChange = (address) => this.props.updateAddress(address)
@@ -49,4 +49,4 @@ const mapDispatchToProps = (dispatch) => {
   }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(GetLocation);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchByLocation);
