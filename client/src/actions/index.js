@@ -10,12 +10,20 @@ export function fetchPets() {
   };
 }
 
-export const addPet = (pet) => {
-  return {
-    type: 'ADD_PET',
-    pet
+export function addPet(pet) {
+  return(dispatch) => {
+    dispatch({ type: 'ADDING_PET'});
+    return fetch('/pets', {
+      method: "POST",
+      body: JSON.stringify(pet),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then(response => response.json())
+    .then(pets => {
+      dispatch({type: 'FETCH_PETS', payload: pets })})
   };
-};
+}
 
 export const filterPetsAction = () => {
 

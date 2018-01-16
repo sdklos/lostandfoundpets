@@ -14,7 +14,7 @@ const ShowPets = (props) => {
           <div>{pet.primary_breed}</div>
           <div>{pet.primary_color}</div>
           <div>{pet.sex}</div>
-          <NavLink to="/pets/{pet.id}" exact>View {pet.name}</NavLink>
+          <NavLink to={`/pets/${pet.id}`}>View {pet.name}</NavLink>
         </div>
       )
     })
