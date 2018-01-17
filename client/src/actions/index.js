@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import { browserHistory } from 'react-router'
 
 export function fetchPets() {
   return (dispatch) => {
@@ -11,15 +12,22 @@ export function fetchPets() {
 }
 
 export function addPet(pet) {
-  return (dispatch)  => {
+  return (dispatch) => {
     dispatch({ type: 'POSTING_PET'})
   return fetch('/pets', {
-    method: "post",
-    body: JSON.stringify(pet)
+    method: "POST",
+    body: JSON.stringify(pet),
+    headers: {
+      'Accept': 'application/json',
+      "Content-Type": "application/json"
+    }
   }).then(response => response.json())
     .then(pet => {
     dispatch({type: 'SET_ACTIVE_PET', payload: pet })
-  })
+    console.log(pet);
+  }).catch((error) => {
+      throw(error);
+    })
   }
 };
 
