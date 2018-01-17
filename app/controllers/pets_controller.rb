@@ -1,7 +1,10 @@
+
 class PetsController < ApplicationController
   def index
     @pets = Pet.all
-    render json: @pets, status: 200
+    respond_to do |format|
+      format.json {render json: @pets, status: 200}
+    end
   end
 
   def show
@@ -10,20 +13,21 @@ class PetsController < ApplicationController
   end
 
   def create
-    binding.pry
-    @pet = Pet.new(pet_params)
-    respond_to do |format|
-      if @pet.save
-        render json: @pet, status: 200
-      else
-        render json: @pet.errors, status: unprocessable_entity
-      end
-    end
+    @pet = Pet.create(pet_params)
+    render json: @pet
+    # respond_to do |format|
+    #   if @pet.save
+    #     render json: @pet, status: 200
+    #   else
+    #     render json: @pet.errors, status: unprocessable_entity
+    #   end
+    # end
   end
 
   private
 
   def pet_params
-    params.require(:pet).permit(:lost, :found, :pet_type, :primary_breed, :primary_color, :age, :weight, :sex, :name, :owner_name, :contact_phone, :url, :addresses => [])
+    params.permit(:lost, :found, :pet_type, :primary_breed, :primary_color, :age, :weight, :sex, :name, :owner_name, :contact_phone, :url, :addresses => [])
   end
+
 end

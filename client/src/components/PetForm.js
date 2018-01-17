@@ -4,15 +4,17 @@ import { addPet } from '../actions/index';
 import { connect } from 'react-redux';
 
 class PetForm extends Component {
+
   handleSubmit = event => {
-    addPet(this.state)
+    event.preventDefault()
+    const pet = this.state
+    this.props.addPet(pet)
   }
 
   handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value
     })
-    console.log(this.state)
   }
 
   render() {
@@ -38,6 +40,18 @@ class PetForm extends Component {
       </form>
     )
   }
+
 }
 
-export default PetForm;
+const mapStateToProps = state => {
+  return {
+    activePet: state.activePet
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    addPet: addPet
+  }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PetForm);

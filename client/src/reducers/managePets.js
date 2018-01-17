@@ -2,7 +2,8 @@ const initialState = {
   loading: false,
   pets: [],
   filtered_pets: [],
-  address: ''
+  address: '',
+  activePet: {}
 }
 
 export const initialPetState = {
@@ -37,10 +38,11 @@ export default function managePets(state = initialState, action) {
       const addressUpdateState = Object.assign({}, state, {address: action.payload})
       console.log(addressUpdateState)
       return addressUpdateState
-    case 'ADD_PET':
-      return Object.assign({}, state, { pets: state.pets.concat(action.pet) });
+    case 'SET_ACTIVE_PET':
+      const activePetState = Object.assign({}, state, {activePet: action.payload})
+      console.log(activePetState)
+      return activePetState
     default:
-      console.log(state)
       return state;
   }
 };

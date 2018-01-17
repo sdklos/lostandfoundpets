@@ -11,19 +11,18 @@ export function fetchPets() {
 }
 
 export function addPet(pet) {
-  return(dispatch) => {
-    dispatch({ type: 'ADDING_PET'});
-    return fetch('/pets', {
-      method: "POST",
-      body: JSON.stringify(pet),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }).then(response => response.json())
-    .then(pets => {
-      dispatch({type: 'FETCH_PETS', payload: pets })})
-  };
-}
+  return (dispatch)  => {
+    dispatch({ type: 'POSTING_PET'})
+  return fetch('/pets', {
+    method: "post",
+    body: JSON.stringify(pet)
+  }).then(response => response.json())
+    .then(pet => {
+    dispatch({type: 'SET_ACTIVE_PET', payload: pet })
+  })
+  }
+};
+
 
 export const filterPetsAction = () => {
 
