@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { addPet } from '../actions/index';
 import { connect } from 'react-redux';
+import PlacesAutocomplete from 'react-places-autocomplete';
 
 class PetForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    const pet = this.state
+    const pet = {pet: this.state}
     this.props.addPet(pet)
   }
 
@@ -15,11 +16,33 @@ class PetForm extends Component {
     this.setState({
       [event.target.name]: event.target.value
     })
+    console.log(this.state)
   }
 
   render() {
+
+    const locationSearchInputProps = {
+      value: this.state.address,
+      onChange: this.handleChange,
+      placeholder: 'Enter an Address',
+      name: 'address'
+    }
+
+    const shouldFetchSuggestions = ({ value }) => value.length > 2
+
+    const AutocompleteItem = ({formattedSuggestion}) => (
+      <div>
+        <strong>
+          {formattedSuggestion.mainText}
+        </strong>{' '}
+      </div>
+    )
+
     return (
+      <div className="input">
+      <PlacesAutocomplete inputProps={locationSearchInputProps} renderSuggestion={AutocompleteItem} shouldFetchSuggestions={shouldFetchSuggestions} onEnterKeyDown={this.handleChange}/>
       <form onSubmit={this.handleSubmit}>
+
         <label htmlFor="name">Pet Name: </label>
         <input type="text" placeholder="Pet Name" name="name" onChange={this.handleChange}/>
 
@@ -38,6 +61,7 @@ class PetForm extends Component {
 
         <button type="submit">Submit Pet</button>
       </form>
+      </div>
     )
   }
 

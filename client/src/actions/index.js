@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch';
-import { browserHistory } from 'react-router'
+
 
 export function fetchPets() {
   return (dispatch) => {

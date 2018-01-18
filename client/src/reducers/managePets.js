@@ -1,4 +1,5 @@
 
+
 const initialState = {
   loading: false,
   pets: [],
@@ -43,7 +44,7 @@ export default function managePets(state = initialState, action) {
       const activePet = action.payload
       const activePetState = Object.assign({}, state, {activePet: activePet})
       console.log(activePetState)
-      this.location.push("/pets/{activePet.id}")
+      window.location.assign(`/pets/${activePet.id}`)
       return activePetState
 
     default:
