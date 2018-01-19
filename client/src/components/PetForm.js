@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
-import { addPet } from '../actions/index';
+import { addPet, setFormState } from '../actions/index';
 import { connect } from 'react-redux';
 import PlacesAutocomplete from 'react-places-autocomplete';
 
@@ -13,10 +13,10 @@ class PetForm extends Component {
   }
 
   handleChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
-    console.log(this.state)
+    var change = {}
+    change[event.target.name] = event.target.value
+    this.props.setFormState(change)
+    console.log(change)
   }
 
   render() {

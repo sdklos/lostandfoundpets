@@ -46,3 +46,10 @@ export function updateAddress(address) {
     payload: address
   }
 }
+
+export function setFormState(formState) {
+  feturn {
+    type: 'SET_FORM_STATE',
+    payload: formState
+  }
+}
