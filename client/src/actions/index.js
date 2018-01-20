@@ -53,3 +53,10 @@ export function setFormState(formState) {
     payload: formState
   }
 }
+
+export function setFormAddressState(formAddressState) {
+  return {
+    type: 'SET_FORM_ADDRESS_STATE',
+    payload: formAddressState
+  }
+}
