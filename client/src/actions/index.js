@@ -48,7 +48,7 @@ export function updateAddress(address) {
 }
 
 export function setFormState(formState) {
-  feturn {
+  return {
     type: 'SET_FORM_STATE',
     payload: formState
   }
