@@ -30,7 +30,7 @@ class PetForm extends Component {
     const locationSearchInputProps = {
       value: this.props.formState.address,
       onChange: this.handleAddressChange,
-      placeholder: 'Enter an Address',
+      placeholder: 'Address',
       name: 'address'
     }
 
@@ -46,29 +46,39 @@ class PetForm extends Component {
     )
 
     return (
-      <div className="input">
-      <PlacesAutocomplete inputProps={locationSearchInputProps} renderSuggestion={AutocompleteItem} shouldFetchSuggestions={shouldFetchSuggestions} onEnterKeyDown={this.handleAddressChange}/>
-      <form onSubmit={this.handleSubmit}>
-
-        <label htmlFor="name">Pet Name: </label>
-        <input type="text" placeholder="Pet Name" name="name" value={this.props.formState.name} onChange={this.handleChange}/>
-
-        <label htmlFor="type">Pet Type: </label>
-        <input type="text" placeholder="Pet Type" name="pet_type" value={this.props.formState.pet_type} onChange={this.handleChange}/>
-
-        <label htmlFor="primary_breed">Primary Breed: </label>
-        <input type="text" placeholder="Primary Breed" value={this.props.formState.primary_breed} name="primary_breed" onChange={this.handleChange}/>
-
-        <label htmlFor="primary_color">Primary Color: </label>
-        <input type="text" placeholder="Primary Color" name="primary_color" value={this.props.formState.primary_color} onChange={this.handleChange}/>
-
-        <label htmlFor="age">Age: </label>
-        <input type="text" placeholder="Age" name="age" value={this.props.formState.age} onChange={this.handleChange}/>
-
-
+      <div>
+        <div className="input">
+          <label htmlFor="address">Address: </label>
+          <PlacesAutocomplete inputProps={locationSearchInputProps} renderSuggestion={AutocompleteItem} shouldFetchSuggestions={shouldFetchSuggestions} onEnterKeyDown={this.handleAddressChange}/>
+        </div>
+        <form onSubmit={this.handleSubmit}>
+        <div className="input">
+          <label htmlFor="status">Status: </label>
+          <input type="text" placeholder="Status" name="status" value={this.props.formState.status} onChange={this.handleChange}/>
+        </div>
+          <div className="input">
+            <label htmlFor="name">Pet Name: </label>
+            <input type="text" placeholder="Pet Name" name="name" value={this.props.formState.name} onChange={this.handleChange}/>
+          </div>
+          <div className="input">
+            <label htmlFor="type">Pet Type: </label>
+            <input type="text" placeholder="Pet Type" name="pet_type" value={this.props.formState.pet_type} onChange={this.handleChange}/>
+          </div>
+          <div className="input">
+            <label htmlFor="primary_breed">Primary Breed: </label>
+            <input type="text" placeholder="Primary Breed" value={this.props.formState.primary_breed} name="primary_breed" onChange={this.handleChange}/>
+          </div>
+          <div className="input">
+            <label htmlFor="primary_color">Primary Color: </label>
+            <input type="text" placeholder="Primary Color" name="primary_color" value={this.props.formState.primary_color} onChange={this.handleChange}/>
+          </div>
+          <div className="input">
+            <label htmlFor="age">Age: </label>
+            <input type="text" placeholder="Age" name="age" value={this.props.formState.age} onChange={this.handleChange}/>
+          </div>
         <button type="submit">Submit Pet</button>
       </form>
-      </div>
+    </div>
     )
   }
 
