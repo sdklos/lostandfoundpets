@@ -1,8 +1,6 @@
 const formState = {
-  address_data: {
-    address: '',
-    address_type: ''
-  },
+  status: '',
+  address: '',
   name: '',
   pet_type: '',
   primary_breed: '',
@@ -57,13 +55,6 @@ export default function managePets(state = initialState, action) {
       console.log(activePetState)
       window.location.assign(`/pets/${activePet.id}`)
       return activePetState
-    case 'SET_FORM_ADDRESS_STATE':
-      const formAddressChange = action.payload
-      const newFormAddressData = Object.assign({}, state.formState.address_data, formAddressChange)
-      const newFormAddressState = Object.assign({}, state.formState, {address_data: newFormAddressData})
-      const setFormAddressState = Object.assign({}, state, {formState: newFormAddressState})
-      console.log(setFormAddressState)
-      return setFormAddressState
     case 'SET_FORM_STATE':
       const formChange = action.payload
       const newFormState = Object.assign({}, state.formState, formChange)

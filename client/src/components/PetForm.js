@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
-import { addPet, setFormState, setFormAddressState } from '../actions/index';
+import { addPet, setFormState } from '../actions/index';
 import { connect } from 'react-redux';
 import PlacesAutocomplete from 'react-places-autocomplete';
 
@@ -22,13 +22,13 @@ class PetForm extends Component {
   handleAddressChange = address => {
     var addressChange = {}
     addressChange['address'] = address
-    this.props.setFormAddressState(addressChange)
+    this.props.setFormState(addressChange)
   }
 
   render() {
 
     const locationSearchInputProps = {
-      value: this.props.formState.address_data.address,
+      value: this.props.formState.address,
       onChange: this.handleAddressChange,
       placeholder: 'Enter an Address',
       name: 'address'
@@ -83,8 +83,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     addPet: addPet,
-    setFormState: setFormState,
-    setFormAddressState: setFormAddressState
+    setFormState: setFormState
   }, dispatch);
 };
 
