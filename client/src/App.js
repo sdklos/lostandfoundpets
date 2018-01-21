@@ -5,10 +5,12 @@ import { BrowserRouter as Router, Route, NavLink, Switch } from 'react-router-do
 import NewPetContainer from './containers/NewPetContainer';
 import PetsContainer from './containers/PetsContainer';
 import PetShow from './components/PetShow';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class App extends Component {
   render() {
     return (
+      <MuiThemeProvider>
       <Router>
         <div>
           <div className="App-header">
@@ -25,6 +27,7 @@ class App extends Component {
           </Switch>
         </div>
       </Router>
+      </MuiThemeProvider>
     );
   }
 }

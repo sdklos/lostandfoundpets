@@ -1,5 +1,24 @@
 import fetch from 'isomorphic-fetch';
 
+export function fetchBreeds(pet_type) {
+  return (dispatch) => {
+    return fetch(`/breeds/${pet_type}.json`)
+    .then(response => response.json())
+    .then(breeds => {
+      dispatch({type: 'FETCH_BREEDS', payload: breeds, name: pet_type})
+    })
+  }
+}
+
+export function fetchDogBreeds() {
+  return (dispatch) => {
+    return fetch('/breeds/dogs.json')
+    .then(response => response.json())
+    .then(breeds => {
+      dispatch({type: 'FETCH_DOG_BREEDS', payload: breeds})
+    })
+  }
+}
 
 export function fetchPets() {
   return (dispatch) => {
