@@ -1,6 +1,8 @@
 const formState = {
   status: '',
-  address: '',
+  address_attributes: {
+    address: ''
+  },
   name: '',
   pet_type: '',
   primary_breed: '',

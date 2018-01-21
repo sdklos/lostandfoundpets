@@ -23,8 +23,8 @@ class PetForm extends Component {
   }
 
   handleAddressChange = address => {
-    var addressChange = {}
-    addressChange['address'] = address
+    var addressChange = {address_attributes: {address: ''}}
+    addressChange['address_attributes']['address'] = address
     this.props.setFormState(addressChange)
   }
 
@@ -60,8 +60,8 @@ class PetForm extends Component {
 
     return (
       <div>
-        <h3>Add A Lost Or Found Pet</h3>
-        <SearchByLocation handleChange={this.handleAddressChange} value={this.props.formState.address} placeholder="Address" />
+        <h3>Add Your Pet Here:</h3>
+        <SearchByLocation handleChange={this.handleAddressChange} value={this.props.formState.address_attributes.address} placeholder="Address" />
         <form onSubmit={this.handleSubmit}>
           <StatusDropDown value={this.props.formState.status} name="status" setFormState={this.props.setFormState} placeHolder="Status" menuItems={statusMenuItems}/>
           <TextField name="name" hintText="Pet Name" value={this.props.formState.name} onChange={this.handleChange} />
