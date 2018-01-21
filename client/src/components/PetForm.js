@@ -5,13 +5,14 @@ import { connect } from 'react-redux';
 import SearchByLocation from '../components/SearchByLocation.js';
 import StatusDropDown from './StatusDropDown.js';
 import DynamicStatusDropDown from './DynamicStatusDropDown.js';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class PetForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
     const pet = {pet: this.props.formState}
-    debugger
     this.props.addPet(pet)
   }
 
@@ -40,35 +41,37 @@ class PetForm extends Component {
     }
   }
 
+  populateColors = (pet_type) => {
+    const dogAndCatColors = ["Brown", "Red", "Yellow", "White", "Black", "Blue", "Grey", "Cream", "Tan", "Orange"]
+    const otherColors = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Black", "White", "Grey", "Pink", "Brown"]
+    if (pet_type === "Dog" || pet_type === "Cat") {
+      return dogAndCatColors
+    } else if (pet_type === "Bird") {
+        return otherColors
+      } else {
+        return ["Please Select a Pet Type"]
+    }
+  }
+
   render() {
     const statusMenuItems = ["Lost", "Found"]
     const petTypeMenuItems = ["Dog", "Cat", "Bird"]
+    const ages = ["Baby", "Young", "Adult", "Senior"]
 
     return (
       <div>
-        <div className="input">
-          <label htmlFor="address">Address: </label>
-          <SearchByLocation handleChange={this.handleAddressChange} value={this.props.formState.address} placeholder="Address" />
-        </div>
+        <h3>Add A Lost Or Found Pet</h3>
+        <SearchByLocation handleChange={this.handleAddressChange} value={this.props.formState.address} placeholder="Address" />
         <form onSubmit={this.handleSubmit}>
           <StatusDropDown value={this.props.formState.status} name="status" setFormState={this.props.setFormState} placeHolder="Status" menuItems={statusMenuItems}/>
-          <div className="input">
-            <label htmlFor="name">Pet Name: </label>
-            <input type="text" placeholder="Pet Name" name="name" value={this.props.formState.name} onChange={this.handleChange}/>
-          </div>
+          <TextField name="name" hintText="Pet Name" value={this.props.formState.name} onChange={this.handleChange} />
           <StatusDropDown value={this.props.formState.pet_type} name="pet_type" setFormState={this.props.setFormState} placeHolder="Pet Type" menuItems={petTypeMenuItems} />
           <DynamicStatusDropDown value={this.props.formState.primary_breed} name="primary_breed" setFormState={this.props.setFormState} placeHolder="Primary Breed" menuItems={this.populateBreeds(this.props.formState.pet_type)}
-              populateBreeds={this.populateBreeds}
+              populateMenu={this.populateBreeds}
             pet_type={this.props.formState.pet_type} />
-          <div className="input">
-            <label htmlFor="primary_color">Primary Color: </label>
-            <input type="text" placeholder="Primary Color" name="primary_color" value={this.props.formState.primary_color} onChange={this.handleChange} />
-          </div>
-          <div className="input">
-            <label htmlFor="age">Age: </label>
-            <input type="text" placeholder="Age" name="age" value={this.props.formState.age} onChange={this.handleChange}/>
-          </div>
-        <button type="submit">Submit Pet</button>
+          <DynamicStatusDropDown value={this.props.formState.primary_color} name="primary_color" setFormState={this.props.setFormState} placeHolder="Primary Color" menuItems={this.populateColors(this.props.formState.pet_type)} populateMenu={this.populateColors} pet_type={this.props.formState.pet_type} />
+          <StatusDropDown value={this.props.formState.age} name="age" setFormState={this.props.setFormState} placeHolder="Age" menuItems={ages} />
+        <RaisedButton type="submit" label="Submit Pet" />
       </form>
     </div>
     )

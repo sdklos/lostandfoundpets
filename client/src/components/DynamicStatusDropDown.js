@@ -23,7 +23,7 @@ export default class DynamicStatusDropDown extends Component {
   }
 
   componentWillUpdate(nextProps) {
-    this.props.populateBreeds(nextProps.pet_type)
+    this.props.populateMenu(nextProps.pet_type)
   }
 
   render() {
