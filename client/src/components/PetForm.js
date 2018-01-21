@@ -59,7 +59,7 @@ class PetForm extends Component {
           <StatusDropDown value={this.props.formState.pet_type} name="pet_type" setFormState={this.props.setFormState} placeHolder="Pet Type" menuItems={petTypeMenuItems} />
           <DynamicStatusDropDown value={this.props.formState.primary_breed} name="primary_breed" setFormState={this.props.setFormState} placeHolder="Primary Breed" menuItems={this.populateBreeds(this.props.formState.pet_type)}
               populateBreeds={this.populateBreeds}
-            pet_type={this.props.formState.pet_type} breeds={this.props.breeds}/>
+            pet_type={this.props.formState.pet_type} />
           <div className="input">
             <label htmlFor="primary_color">Primary Color: </label>
             <input type="text" placeholder="Primary Color" name="primary_color" value={this.props.formState.primary_color} onChange={this.handleChange} />

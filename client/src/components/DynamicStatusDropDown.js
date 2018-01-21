@@ -15,7 +15,7 @@ export default class DynamicStatusDropDown extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    if(nextProps.pet_type !== this.props.pet_type) {
+    if(nextProps.pet_type !== this.props.pet_type || nextProps.value !== this.props.value ) {
       return true
     } else {
       return false
