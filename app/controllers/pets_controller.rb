@@ -24,6 +24,15 @@ class PetsController < ApplicationController
     # end
   end
 
+  def destroy
+    @pet = Pet.find(params[:id])
+    @pet.destroy
+    @pets = Pet.all
+    respond_to do |format|
+      format.json {render json: @pets, status: 200}
+    end
+  end
+
   private
 
   def pet_params

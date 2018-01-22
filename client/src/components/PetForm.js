@@ -60,8 +60,11 @@ class PetForm extends Component {
 
     return (
       <div>
-        <h3>Add Your Pet Here:</h3>
-        <SearchByLocation handleChange={this.handleAddressChange} value={this.props.formState.address_attributes.address} placeholder="Address" />
+        <h3>{this.props.template === "new" ? 'Add' : 'Edit'} Your Pet Here:</h3>
+        <SearchByLocation
+          handleChange={this.handleAddressChange}
+          value={this.props.formState.address_attributes.address}
+          placeholder="Address" />
         <form onSubmit={this.handleSubmit}>
           <StatusDropDown value={this.props.formState.status} name="status" setFormState={this.props.setFormState} placeHolder="Status" menuItems={statusMenuItems}/>
           <TextField name="name" hintText="Pet Name" value={this.props.formState.name} onChange={this.handleChange} />

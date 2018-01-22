@@ -5,6 +5,6 @@ export default class NewPetContainer extends Component {
 
   render() {
   return (
-    <PetForm />
+    <PetForm template="new" />
   )}
 }

@@ -30,6 +30,24 @@ export function fetchPets() {
   };
 }
 
+export function deletePet(pet_id) {
+  return (dispatch) => {
+    return fetch(`/pets/${pet_id}.json`, {
+      method: "DELETE",
+      body: JSON.stringify(pet_id),
+      headers: {
+        'Accept': 'application/json',
+        "Content-Type": "application/json"
+      }
+    }).then(response => response.json())
+    .then(pets => {
+    dispatch({type: 'FETCH_PETS', payload: pets })})
+    .catch((error) => {
+        throw(error);
+    })
+  }
+}
+
 export function addPet(pet) {
   return (dispatch) => {
     dispatch({ type: 'POSTING_PET'})
@@ -44,12 +62,26 @@ export function addPet(pet) {
     .then(pet => {
     dispatch({type: 'SET_ACTIVE_PET', payload: pet })
     console.log(pet);
+    window.location.assign(`/pets/${pet.id}`)
   }).catch((error) => {
       throw(error);
     })
   }
 };
 
+export function findPet(id) {
+  return (dispatch) => {
+    dispatch({ type: 'LOADING_PETS' });
+    return fetch('/pets.json')
+    .then(response => response.json())
+    .then(pets => {
+      const pet = pets.find(pet => {
+        return pet.id.toString() === id
+      })
+    dispatch({type: 'SET_ACTIVE_PET', payload: pet })
+  })
+};
+}
 
 export const filterPetsAction = () => {
 

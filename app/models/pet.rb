@@ -1,5 +1,5 @@
 class Pet < ApplicationRecord
-  belongs_to :address
+  belongs_to :address, optional: true
 
   has_attached_file :picture, styles: { large: "600x600>", medium: "300x300>", thumb: "100x100>" }, default_url: "/images/missing.png"
   validates_attachment_content_type :picture, content_type: /\Aimage\/.*\z/

@@ -71,7 +71,7 @@ export default function managePets(state = initialState, action) {
     case 'SET_ACTIVE_PET':
       const activePet = action.payload
       const activePetState = Object.assign({}, state, {activePet: activePet})
-      window.location.assign(`/pets/${activePet.id}`)
+
       return activePetState
     case 'SET_FORM_STATE':
       const formChange = action.payload
