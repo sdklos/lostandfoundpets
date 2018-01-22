@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
-import { addPet, setFormState } from '../actions/index';
+import { addPet, findPet, setFormState } from '../actions/index';
 import { connect } from 'react-redux';
 import SearchByLocation from '../components/SearchByLocation.js';
 import StatusDropDown from './StatusDropDown.js';
@@ -8,8 +8,11 @@ import DynamicStatusDropDown from './DynamicStatusDropDown.js';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
-class PetForm extends Component {
+class EditPetForm extends Component {
 
+  constructor(props) {
+    super(props);
+  }
   handleSubmit = event => {
     event.preventDefault()
     const pet = {pet: this.props.formState}
@@ -53,22 +56,22 @@ class PetForm extends Component {
     }
   }
 
-  addressPlaceholder = (pet) => {
-    if (pet.address.address !== undefined) {
-      return pet.address.address
-    } else {
-      return "Address"
-    }
-  }
-
   render() {
     const statusMenuItems = ["Lost", "Found"]
     const petTypeMenuItems = ["Dog", "Cat", "Bird"]
     const ages = ["Baby", "Young", "Adult", "Senior"]
 
+    const address_string = this.props.activePet.address_string
+    const status = this.props.activePet.status
+    const name = this.props.activePet.name
+    const pet_type = this.props.activePet.pet_type
+    const primary_breed = this.props.activePet.primary_breed
+    const primary_color = this.props.activePet.primary_color
+    const age = this.props.activePet.age
+
     return (
       <div>
-        <h3>{this.props.template === "new" ? 'Add' : 'Edit'} Your Pet Here:</h3>
+        <h3>Edit Your Pet Here:</h3>
         <SearchByLocation
           handleChange={this.handleAddressChange}
           value={this.props.formState.address_attributes.address}
@@ -76,7 +79,7 @@ class PetForm extends Component {
         <form onSubmit={this.handleSubmit}>
           <StatusDropDown value={this.props.formState.status} name="status" setFormState={this.props.setFormState} placeHolder="Status" menuItems={statusMenuItems}/>
           <TextField name="name" hintText="Pet Name" value={this.props.formState.name} onChange={this.handleChange} />
-          <StatusDropDown value={this.props.formState.pet_type} name="pet_type" setFormState={this.props.setFormState} placeHolder="Pet Type" menuItems={petTypeMenuItems} />
+          <StatusDropDown value={this.props.formState.pet_type} name="pet_type" setFormState={this.props.setFormState} placeHolder={"Pet Type"} menuItems={petTypeMenuItems} />
           <DynamicStatusDropDown value={this.props.formState.primary_breed} name="primary_breed" setFormState={this.props.setFormState} placeHolder="Primary Breed" menuItems={this.populateBreeds(this.props.formState.pet_type)}
               populateMenu={this.populateBreeds}
             pet_type={this.props.formState.pet_type} />
@@ -94,14 +97,15 @@ const mapStateToProps = state => {
   return {
     formState: state.formState,
     breeds: state.breeds,
-    activePet: state.active
+    activePet: state.activePet
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     addPet: addPet,
-    setFormState: setFormState
+    setFormState: setFormState,
+    findPet: findPet
   }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PetForm);
+export default connect(mapStateToProps, mapDispatchToProps)(EditPetForm);

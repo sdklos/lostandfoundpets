@@ -1,18 +1,24 @@
 import React, { Component } from 'react';
-import PetForm from '../components/PetForm.js';
+import EditPetForm from '../components/EditPetForm.js';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { findPet } from '../actions/index';
 
 class EditPetContainer extends Component {
 
-  componentDidMount(){
+  constructor(props) {
+    super(props)
     this.props.findPet(this.props.match.params.id)
   }
 
+  populateForm = () => {
+    debugger
+  }
+
   render() {
+
   return (
-    <PetForm template="editing"/>
+    <EditPetForm template="editing" pet={this.props.pet} />
   )}
 }
 

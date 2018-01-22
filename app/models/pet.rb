@@ -10,4 +10,13 @@ class Pet < ApplicationRecord
         self.address = address
       end
   end
+
+  def address_string
+    if self.address
+      result = "#{self.address.address}"
+    else
+      result = ''
+    end
+    return result
+  end
 end

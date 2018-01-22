@@ -21,6 +21,7 @@ class PetShow extends React.Component {
           <div>{pet.primary_breed}</div>
           <div>{pet.primary_color}</div>
           <div>{pet.sex}</div>
+          <div>{pet.address_string}</div>
         </div>
     )
   }

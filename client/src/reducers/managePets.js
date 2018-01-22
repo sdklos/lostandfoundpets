@@ -26,26 +26,6 @@ const initialState = {
   breeds: breeds
 }
 
-export const initialPetState = {
-  id: null,
-  lost: null,
-  found: null,
-  petType: '',
-  name: '',
-  primaryBreed: '',
-  secondaryBreed: '',
-  primaryColor: '',
-  secondaryColor: '',
-  sex: '',
-  neutered: null,
-  weight: null,
-  age: '',
-  url: '',
-  ownerName: '',
-  contact_phone: '',
-  contact_email: ''
-}
-
 function mapBreeds(breeds) {
   return breeds.map(breed => {
     return breed.name
@@ -71,7 +51,6 @@ export default function managePets(state = initialState, action) {
     case 'SET_ACTIVE_PET':
       const activePet = action.payload
       const activePetState = Object.assign({}, state, {activePet: activePet})
-
       return activePetState
     case 'SET_FORM_STATE':
       const formChange = action.payload

@@ -1,5 +1,6 @@
 class AddressSerializer < ActiveModel::Serializer
-  attributes :address, :latitude, :longitude
-
+  attributes :address
   has_many :pets
+
+
 end

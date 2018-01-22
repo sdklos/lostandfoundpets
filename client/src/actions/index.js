@@ -71,7 +71,7 @@ export function addPet(pet) {
 
 export function findPet(id) {
   return (dispatch) => {
-    dispatch({ type: 'LOADING_PETS' });
+    dispatch({ type: 'FINDING_PET' });
     return fetch('/pets.json')
     .then(response => response.json())
     .then(pets => {
