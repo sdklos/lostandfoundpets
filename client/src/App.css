@@ -2,6 +2,18 @@
   font-family: 'Roboto', sans-serif;
 }
 
+span {
+    margin: 0 10px;
+}
+
+span:first-of-type{
+    margin-left: 0;
+}
+
+span:last-of-type{
+    margin-right: 0;
+}
+
 .App {
   text-align: center;
 }
@@ -22,7 +34,8 @@
 }
 
 .input {
-  padding: 0 0 0 0;
+  margin-top: 5em;
+  margin-bottom: 3em;
   width: 400px;
   font-family: Roboto;
   font-size: 18px;

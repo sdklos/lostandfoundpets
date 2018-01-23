@@ -69,11 +69,13 @@ class PetForm extends Component {
     return (
       <div>
         <h3>{this.props.template === "new" ? 'Add' : 'Edit'} Your Pet Here:</h3>
+      <div className="input">
         <SearchByLocation
           handleChange={this.handleAddressChange}
           value={this.props.formState.address_attributes.address}
           placeholder="Address" />
-        <form onSubmit={this.handleSubmit}>
+      </div>
+        <form className="input" onSubmit={this.handleSubmit}>
           <StatusDropDown value={this.props.formState.status} name="status" setFormState={this.props.setFormState} placeHolder="Status" menuItems={statusMenuItems}/>
           <TextField name="name" hintText="Pet Name" value={this.props.formState.name} onChange={this.handleChange} />
           <StatusDropDown value={this.props.formState.pet_type} name="pet_type" setFormState={this.props.setFormState} placeHolder="Pet Type" menuItems={petTypeMenuItems} />
@@ -82,7 +84,9 @@ class PetForm extends Component {
             pet_type={this.props.formState.pet_type} />
           <DynamicStatusDropDown value={this.props.formState.primary_color} name="primary_color" setFormState={this.props.setFormState} placeHolder="Primary Color" menuItems={this.populateColors(this.props.formState.pet_type)} populateMenu={this.populateColors} pet_type={this.props.formState.pet_type} />
           <StatusDropDown value={this.props.formState.age} name="age" setFormState={this.props.setFormState} placeHolder="Age" menuItems={ages} />
-        <RaisedButton type="submit" label="Submit Pet" />
+        <div className="input">
+          <RaisedButton type="submit" label="Submit Pet" />
+        </div>
       </form>
     </div>
     )

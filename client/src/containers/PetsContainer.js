@@ -8,7 +8,9 @@ import { deletePet } from '../actions/index.js'
 import { updateAddress } from '../actions/index';
 
 class PetsContainer extends Component {
-  componentDidMount(){
+
+  constructor(props) {
+    super(props)
     this.props.fetchPets()
   }
 

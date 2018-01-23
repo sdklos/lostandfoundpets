@@ -20,7 +20,7 @@ gem 'dotenv-rails'
 gem 'geocoder'
 gem 'petfinder'
 gem 'active_model_serializers'
-gem "paperclip", "~> 5.0.0"
+gem "paperclip", "~> 5.1.0"
 gem 'foreman'
 gem 'faker'
 gem 'pry'

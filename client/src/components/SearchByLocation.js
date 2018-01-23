@@ -27,7 +27,7 @@ class SearchByLocation extends Component {
     )
 
     return(
-      <div className="input">
+      <div>
         <PlacesAutocomplete onSelect={this.onChange} renderSuggestion={AutocompleteItem} onEnterKeyDown={this.onChange} inputProps={inputProps} shouldFetchSuggestions={shouldFetchSuggestions} />
       </div>
     )

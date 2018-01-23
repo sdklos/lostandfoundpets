@@ -22,7 +22,6 @@ export function fetchDogBreeds() {
 
 export function fetchPets() {
   return (dispatch) => {
-    dispatch({ type: 'LOADING_PETS' });
     return fetch('/pets.json')
     .then(response => response.json())
     .then(pets => {

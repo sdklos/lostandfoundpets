@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import EditPetForm from '../components/EditPetForm.js';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { findPet } from '../actions/index';
 
 class EditPetContainer extends Component {
 
   constructor(props) {
     super(props)
-    this.props.findPet(this.props.match.params.id)
+    this.props.findPetToEdit(this.props.match.params.id)
   }
 
   populateForm = () => {
@@ -28,10 +26,4 @@ const mapStateToProps = state => {
   };
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
-    findPet: findPet
-  }, dispatch);
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(EditPetContainer)
+export default connect(mapStateToProps)(EditPetContainer)
