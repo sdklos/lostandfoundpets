@@ -25,7 +25,8 @@ class PetsController < ApplicationController
   end
 
   def update
-    @pet = Pet.update(pet_params)
+    @pet = Pet.find(params[:id])
+    @pet = @pet.update(pet_params)
     render json: @pet
   end
 

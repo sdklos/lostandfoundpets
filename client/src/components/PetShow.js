@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, NavLink, Switch } from 'react-router-dom';
@@ -9,11 +9,12 @@ import DynamicStatusDropDown from './DynamicStatusDropDown.js';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
-class PetShow extends React.Component {
+class PetShow extends Component {
   constructor(props) {
     super(props);
     this.state = {isEditing: false}
     this.updatePetAddressState = this.updatePetAddressState.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount(){
@@ -51,9 +52,10 @@ class PetShow extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    const pet = this.state.pet
-    pet['address_attributes'] = {}
-    pet['address_attributes']['address'] = pet['address_string']
+    const pet = {pet: this.state.pet}
+    pet['pet']['address_attributes'] = {}
+    pet['pet']['address_attributes']['address'] = this.state.pet['address_string']
+    debugger
     this.props.updatePet(pet, this.props.pet.id)
     console.log(pet)
   }
@@ -100,7 +102,7 @@ class PetShow extends React.Component {
           handleChange={this.updatePetAddressState}
           value={statePet.address_string}
           placeholder="Address" />
-        <form onSubmit={this.handleSubmit}>
+        <form>
           <StatusDropDown
             value={statePet.status}
             name="status"
@@ -141,7 +143,7 @@ class PetShow extends React.Component {
             placeHolder="Age"
             menuItems={ages}
           />
-        <RaisedButton type="submit" label="Submit Pet" />
+        <RaisedButton type="button" onClick={this.handleSubmit} label="Update Pet" />
       </form>
     </div>
       )
