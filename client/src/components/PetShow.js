@@ -52,10 +52,9 @@ class PetShow extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    const pet = {pet: this.state.pet}
-    pet['pet']['address_attributes'] = {}
-    pet['pet']['address_attributes']['address'] = this.state.pet['address_string']
-    debugger
+    const pet = this.state.pet
+    pet['address_attributes'] = {}
+    pet['address_attributes']['address'] = this.state.pet['address_string']
     this.props.updatePet(pet, this.props.pet.id)
     console.log(pet)
   }
