@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { addPet } from '../actions/index';
-import { connect } from 'react-redux';
 import SearchByLocation from '../components/SearchByLocation.js';
 import StatusDropDown from './StatusDropDown.js';
 import DynamicStatusDropDown from './DynamicStatusDropDown.js';
@@ -10,22 +7,12 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 class EditPetForm extends Component {
 
-  handleSubmit = event => {
-    event.preventDefault()
-    const pet = {pet: this.props.formState}
-    this.props.addPet(pet)
-  }
-
-  handleChange = event => {
-    var change = {}
-    change[event.target.name] = event.target.value
-    this.props.updateEditFormState(change)
-  }
-
-  handleAddressChange = address => {
-    var addressChange = {address_attributes: {address: ''}}
-    addressChange['address_attributes']['address'] = address
-    this.props.updateEditFormState(addressChange)
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.pet !== this.props.pet) {
+      return true
+    } else {
+      return false
+    }
   }
 
   populateBreeds = (pet_type) => {
@@ -62,18 +49,40 @@ class EditPetForm extends Component {
       <div>
         <h3>Edit Your Pet Here:</h3>
         <SearchByLocation
-          handleChange={this.handleAddressChange}
-          value={this.props.editFormState.address_string}
+          handleChange={this.props.handleAddressChange.bind(this)}
+          value={this.props.pet.address_string}
           placeholder="Address" />
-        <form onSubmit={this.handleSubmit}>
-          <StatusDropDown value={this.props.editFormState.status} name="status" setFormState={this.props.updateEditFormState} placeHolder="Status" menuItems={statusMenuItems}/>
-          <TextField name="name" hintText="Pet Name" value={this.props.editFormState.name} onChange={this.handleChange} />
-          <StatusDropDown value={this.props.editFormState.pet_type} name="pet_type" setFormState={this.props.updateEditFormState} placeHolder={"Pet Type"} menuItems={petTypeMenuItems} />
-          <DynamicStatusDropDown value={this.props.formState.primary_breed} name="primary_breed" setFormState={this.props.setFormState} placeHolder="Primary Breed" menuItems={this.populateBreeds(this.props.formState.pet_type)}
-              populateMenu={this.populateBreeds}
-            pet_type={this.props.formState.pet_type} />
-          <DynamicStatusDropDown value={this.props.formState.primary_color} name="primary_color" setFormState={this.props.setFormState} placeHolder="Primary Color" menuItems={this.populateColors(this.props.formState.pet_type)} populateMenu={this.populateColors} pet_type={this.props.formState.pet_type} />
-          <StatusDropDown value={this.props.formState.age} name="age" setFormState={this.props.setFormState} placeHolder="Age" menuItems={ages} />
+        <form onSubmit={this.props.handleSubmit}>
+          <StatusDropDown value={this.props.pet.status} name="status" setFormState={this.props.setFormState} placeHolder="Status" menuItems={statusMenuItems}/>
+          <TextField
+            name="name" hintText="Pet Name"
+            value={this.props.pet.name}
+            onChange={this.handleChange} />
+          <StatusDropDown value={this.props.pet.pet_type} name="pet_type" setFormState={this.props.setFormState} placeHolder="Pet Type" menuItems={petTypeMenuItems} />
+          <DynamicStatusDropDown
+            value={this.props.pet.primary_breed}
+            name="primary_breed"
+            setFormState={this.props.setFormState}
+            placeHolder="Primary Breed"
+            menuItems={this.populateBreeds(this.props.pet.pet_type)}
+            populateMenu={this.populateBreeds}
+            pet_type={this.props.pet.pet_type}
+          />
+          <DynamicStatusDropDown
+            value={this.props.pet.primary_color}
+            name="primary_color"
+            setFormState={this.props.setFormState}
+            placeHolder="Primary Color"
+            menuItems={this.populateColors(this.props.pet.pet_type)}
+            populateMenu={this.populateColors}
+            pet_type={this.props.pet.pet_type} />
+          <StatusDropDown
+            value={this.props.pet.age}
+            name="age"
+            setFormState={this.props.setFormState}
+            placeHolder="Age"
+            menuItems={ages}
+          />
         <RaisedButton type="submit" label="Submit Pet" />
       </form>
     </div>
@@ -82,16 +91,4 @@ class EditPetForm extends Component {
 
 }
 
-const mapStateToProps = state => {
-  return {
-    breeds: state.breeds,
-    activePet: state.activePet
-  }
-}
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
-    addPet: addPet,
-  }, dispatch);
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(EditPetForm);
+export default EditPetForm;

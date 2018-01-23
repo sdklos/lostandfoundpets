@@ -68,7 +68,7 @@ class PetForm extends Component {
 
     return (
       <div>
-        <h3>{this.props.template === "new" ? 'Add' : 'Edit'} Your Pet Here:</h3>
+        <h3>Add Your Pet Here:</h3>
       <div className="input">
         <SearchByLocation
           handleChange={this.handleAddressChange}

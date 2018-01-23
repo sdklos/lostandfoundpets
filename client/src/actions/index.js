@@ -22,6 +22,7 @@ export function fetchDogBreeds() {
 
 export function fetchPets() {
   return (dispatch) => {
+    dispatch({ type: 'LOADING_PETS' });
     return fetch('/pets.json')
     .then(response => response.json())
     .then(pets => {
@@ -46,6 +47,27 @@ export function deletePet(pet_id) {
     })
   }
 }
+
+export function updatePet(pet, id) {
+  return (dispatch) => {
+    dispatch({type: 'UPDATING_PET'})
+    return fetch(`/pets/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify(pet),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json())
+    .then(pet => {
+    dispatch({type: 'SET_ACTIVE_PET', payload: pet })
+    console.log(pet);
+    window.location.assign(`/pets/${id}`)
+  }).catch((error) => {
+      throw(error);
+    })
+  }
+};
 
 export function addPet(pet) {
   return (dispatch) => {

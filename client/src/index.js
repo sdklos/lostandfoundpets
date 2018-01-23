@@ -7,7 +7,7 @@ import './index.css';
 import thunk from 'redux-thunk';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import { fetchBreeds, fetchPets } from './actions/index.js'
+import { fetchBreeds } from './actions/index.js'
 
 const middleware = applyMiddleware(thunk);
 
