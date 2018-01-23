@@ -20,10 +20,10 @@ gem 'dotenv-rails'
 gem 'geocoder'
 gem 'petfinder'
 gem 'active_model_serializers'
-gem "paperclip", "~> 5.1.0"
 gem 'foreman'
 gem 'faker'
 gem 'pry'
+gem 'random-location'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
