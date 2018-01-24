@@ -1,3 +1,5 @@
+require 'pry'
+
 class Pet < ApplicationRecord
   belongs_to :address, optional: true
 
@@ -16,4 +18,9 @@ class Pet < ApplicationRecord
     end
     return result
   end
+
+  def self.perform_query(params)
+    @pets = Pet.all.select {|pet| pet.address.is_near(params[:address], params[:radius])}
+  end
+
 end

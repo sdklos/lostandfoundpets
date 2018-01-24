@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   root to: "welcome#welcome"
 
+  get 'pets/query', to: 'pets#query'
+
   resources :addresses
   resources :pets
 
@@ -18,6 +20,8 @@ Rails.application.routes.draw do
   get 'breeds/dogs'
   get 'breeds/cats'
   get 'breeds/birds'
+
+
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

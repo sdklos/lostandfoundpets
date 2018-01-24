@@ -7,6 +7,13 @@ class PetsController < ApplicationController
     end
   end
 
+  def query
+    @pets = Pet.perform_query(params)
+    respond_to do |format|
+      format.json {render json: @pets, status: 200}
+    end
+  end
+
   def show
     @pet = Pet.find(params[:id])
     render json: @pet, status: 200
