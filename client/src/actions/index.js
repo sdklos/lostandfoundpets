@@ -22,7 +22,7 @@ export function fetchDogBreeds() {
 
 export function fetchPets() {
   return (dispatch) => {
-    dispatch({ type: 'LOADING_PETS' });
+    dispatch({ type: 'LOADING' });
     return fetch('/pets.json')
     .then(response => response.json())
     .then(pets => {
@@ -32,6 +32,7 @@ export function fetchPets() {
 
 export function deletePet(pet_id) {
   return (dispatch) => {
+    dispatch({ type: 'LOADING' });
     return fetch(`/pets/${pet_id}.json`, {
       method: "DELETE",
       body: JSON.stringify(pet_id),
@@ -50,7 +51,7 @@ export function deletePet(pet_id) {
 
 export function updatePet(pet, id) {
   return (dispatch) => {
-    dispatch({type: 'UPDATING_PET'})
+    dispatch({type: 'LOADING'})
     return fetch(`/pets/${id}`, {
       method: "PATCH",
       body: JSON.stringify(pet),
@@ -71,7 +72,7 @@ export function updatePet(pet, id) {
 
 export function addPet(pet) {
   return (dispatch) => {
-    dispatch({ type: 'POSTING_PET'})
+    dispatch({ type: 'LOADING'})
   return fetch('/pets', {
     method: "POST",
     body: JSON.stringify(pet),
@@ -92,7 +93,7 @@ export function addPet(pet) {
 
 export function findPet(id) {
   return (dispatch) => {
-    dispatch({ type: 'FINDING_PET' });
+    dispatch({ type: 'LOADING' });
     return fetch('/pets.json')
     .then(response => response.json())
     .then(pets => {
@@ -100,8 +101,20 @@ export function findPet(id) {
         return pet.id.toString() === id
       })
     dispatch({type: 'SET_ACTIVE_PET', payload: pet })
-  })
-};
+    })
+  };
+}
+
+export function submitLocationQuery(queryParams) {
+  const address = queryParams.address
+  const radius = queryParams.radius
+  return(dispatch) => {
+    dispatch({ type: 'LOADING_PETS' });
+    return fetch(`/pets/query?address=${queryParams.address}&radius=${queryParams.radius}.json`)
+    .then(response => response.json())
+    .then(pets => {
+    dispatch({type: 'QUERY_PETS', payload: pets })})
+  };
 }
 
 export const filterPetsAction = () => {
@@ -119,9 +132,36 @@ export function updateAddress(address) {
   }
 }
 
+export function updateRadius(radius) {
+  return {
+    type: 'UPDATE_RADIUS',
+    payload: radius
+  }
+}
+
 export function setFormState(formState) {
   return {
     type: 'SET_FORM_STATE',
     payload: formState
+  }
+}
+
+export function setPetTypeFilter(filterState) {
+  return {
+    type: 'SET_PET_TYPE_FILTER',
+    payload: filterState
+  }
+}
+
+export function setPrimaryBreedFilter(filterState) {
+  return {
+    type: 'SET_PRIMARY_BREED_FILTER',
+    payload: filterState
+  }
+}
+
+export function removeFilter() {
+  return {
+    type: 'REMOVE_FILTER'
   }
 }
