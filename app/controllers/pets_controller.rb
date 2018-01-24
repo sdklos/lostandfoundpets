@@ -32,9 +32,13 @@ class PetsController < ApplicationController
   end
 
   def update
-    @pet = Pet.find(params[:id])
-    @pet = @pet.update(pet_params)
-    render json: @pet
+    @pet = Pet.all.find(params[:id])
+    @pet.update(pet_params)
+      if @pet.save
+        render json: @pet, status: 200
+      else
+        render json: @pet.errors, status: :unprocessable_entity
+      end
   end
 
   def destroy
@@ -49,7 +53,7 @@ class PetsController < ApplicationController
   private
 
   def pet_params
-    params.require(:pet).permit(:lost, :found, :pet_type, :primary_breed, :primary_color, :age, :weight, :sex, :name, :owner_name, :contact_phone, :url, :address_attributes => [:address])
+    params.require(:pet).permit(:id, :status, :pet_type, :primary_breed, :primary_color, :age, :weight, :sex, :name, :owner_name, :contact_phone, :url, :address_attributes => [:address])
   end
 
 end
