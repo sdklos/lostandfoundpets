@@ -45,7 +45,8 @@ export default function managePets(state = initialState, action) {
   switch(action.type) {
     case 'REMOVE_FILTER':
       const noFilters = Object.assign({}, state.filters, {pet_type: '', primary_breed: ''})
-      const noFilterState = Object.assign({}, state, {filtering: false, filters: noFilters})
+      const noParams = Object.assign({}, state.queryParams, {address: '', radius: 15})
+      const noFilterState = Object.assign({}, state, {filtering: false, filters: noFilters, queryParams: noParams})
       return noFilterState
     case 'FETCH_BREEDS':
       const breeds = {}
