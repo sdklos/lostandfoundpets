@@ -85,7 +85,6 @@ export function addPet(pet) {
   }).then(response => response.json())
     .then(pet => {
     dispatch({type: 'SET_ACTIVE_PET', payload: pet })
-    console.log(pet);
     window.location.assign(`/pets/${pet.id}`)
   }).catch((error) => {
       throw(error);
@@ -96,13 +95,15 @@ export function addPet(pet) {
 export function findPet(id) {
   return (dispatch) => {
     dispatch({ type: 'LOADING' });
-    return fetch('/pets.json')
+    return fetch(`/pets/${id}`)
     .then(response => response.json())
-    .then(pets => {
-      const pet = pets.find(pet => {
-        return pet.id.toString() === id
-      })
+    .then(pet => {
     dispatch({type: 'SET_ACTIVE_PET', payload: pet })
+    if (window.location.pathname !== `/pets/${pet.id}`){
+        window.location.assign(`/pets/${pet.id}`)
+    }
+  }).catch((error) => {
+      throw(error);
     })
   };
 }
