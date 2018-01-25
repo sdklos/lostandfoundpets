@@ -183,7 +183,7 @@ class PetShow extends Component {
           <p>Primary Breed: {pet.primary_breed}</p>
           <p>Primary Color: {pet.primary_color}</p>
           <p>Status: {pet.status}</p>
-          <p>Reported At: {pet.address_string}</p>
+          <p>Reported At: {pet.address.address}</p>
           <p>Contact Phone: {pet.contact_phone}</p>
         </CardText>
           <span><RaisedButton type="button" onClick={this.toggleEdit} label="Edit Pet" /></span>

@@ -17,6 +17,20 @@ const breeds = {
   birds: []
 }
 
+const activePet = {
+  status: '',
+  address: {
+    address: ''
+  },
+  address_string: '',
+  name: '',
+  pet_type: '',
+  primary_breed: '',
+  primary_color: '',
+  age: '',
+  contact_phone: ''
+}
+
 const initialState = {
   filtering: false,
   loading: false,
@@ -26,7 +40,7 @@ const initialState = {
     address: '',
     radius: 15
   },
-  activePet: {},
+  activePet: activePet,
   formState: formState,
   filters: {
     pet_type: '',
