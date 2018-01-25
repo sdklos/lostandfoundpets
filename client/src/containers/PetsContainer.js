@@ -8,6 +8,8 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import StatusDropDown from '../components/StatusDropDown.js';
 import DynamicStatusDropDown from '../components/DynamicStatusDropDown.js';
+import '../App.css';
+
 
 class PetsContainer extends Component {
 
@@ -42,10 +44,7 @@ class PetsContainer extends Component {
     }
   }
 
-
-
   render() {
-
     const petTypeMenuItems = ["Dog", "Cat", "Bird"]
 
     function ConditionalRender(props) {
@@ -60,15 +59,24 @@ class PetsContainer extends Component {
     return (
       <div>
         <h1>Search for Pets</h1>
-        <div className="input">
-          <SearchByLocation handleChange={this.props.updateAddress} value={this.props.queryParams.address} placeholder="Enter an Address to Search"/>
+        <div className="container-2">
           <StatusDropDown
+            className="item-1"
             value={this.props.filters.pet_type}
             name="pet_type"
             setFormState={this.props.setPetTypeFilter}
             placeHolder="Filter By Pet Type"
             menuItems={petTypeMenuItems} />
+          <TextField
+            className="item-1"
+            name="radius"
+            floatingLabelText="Enter a radius in miles"
+            floatingLabelFixed={true}
+            value={this.props.queryParams.radius}
+            onChange={this.handleRadiusChange}
+          />
           <DynamicStatusDropDown
+            className="item-1"
             value={this.props.filters.primary_breed}
             name="primary_breed"
             setFormState={this.props.setPrimaryBreedFilter}
@@ -77,24 +85,25 @@ class PetsContainer extends Component {
             populateMenu={this.populateBreeds}
             pet_type={this.props.filters.pet_type}
           />
+        <SearchByLocation
+          className="item-1"
+          handleChange={this.props.updateAddress}
+          value={this.props.queryParams.address}
+          placeholder="Enter an Address to Search"/>
         </div>
-        <div className="input">
-          <TextField
-            name="radius"
-            floatingLabelText="Enter a radius in miles (default is 15)"
-            floatingLabelFixed={true}
-            value={this.props.queryParams.radius}
-            onChange={this.handleRadiusChange}
-          />
-          <RaisedButton label="Search By Location" onClick={this.handleLocation.bind(this)}/>
+        <div>
+        <span><RaisedButton label="Search By Location" onClick={this.handleLocation.bind(this)}/>
+        </span>
+        <span>
           <RaisedButton label="View All Pets"
             onClick={this.handleRemoveFilter} />
+        </span>
         </div>
         <ConditionalRender
-          isFiltering={this.props.isFiltering}
-          pets={this.props.pets}
-          filtered_pets={this.props.filtered_pets}
-           />
+            isFiltering={this.props.isFiltering}
+            pets={this.props.pets}
+            filtered_pets={this.props.filtered_pets}
+        />
       </div>
     )}
 };

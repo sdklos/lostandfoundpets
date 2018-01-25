@@ -42,3 +42,31 @@ span:last-of-type{
   font-weight: 300;
   text-overflow: ellipsis;
 }
+
+.container-1 {
+  padding-top: 50px;
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr 1fr;;
+  grid-template-rows: auto;
+  grid-gap: 50px 50px;
+  justify-items: center;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+}
+
+.container-2 {
+  padding-bottom: 200px;
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  justify-items: stretch;
+  align-items: stretch;
+}
+
+.item-1 {
+  grid-column: auto;
+  grid-row: auto;
+  justify-self: stretch;
+  align-self: stretch;
+}
