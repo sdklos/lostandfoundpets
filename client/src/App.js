@@ -18,8 +18,10 @@ class App extends Component {
           <p className="App-title">
             Lost and Found Pets
           </p>
-            <span><NavLink to="/" exact>Home</NavLink></span>
-            <span><NavLink to="/add" exact>Add a Lost or Found Pet</NavLink></span>
+            <div className="navigation">
+              <span><NavLink to="/" exact>Home</NavLink></span>
+              <span><NavLink to="/add" exact>Add a Lost or Found Pet</NavLink></span>
+            </div>
           </div>
 
           <Switch>

@@ -2,17 +2,19 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, NavLink, Switch } from 'react-router-dom';
-import { findPet, updatePet } from '../actions/index';
+import { findPet, updatePet, deletePet } from '../actions/index';
 import SearchByLocation from '../components/SearchByLocation.js';
 import StatusDropDown from './StatusDropDown.js';
 import DynamicStatusDropDown from './DynamicStatusDropDown.js';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 
 class PetShow extends Component {
   constructor(props) {
     super(props);
     this.state = {isEditing: false}
+    this.state = {confirmDelete: false}
     this.updatePetAddressState = this.updatePetAddressState.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -26,6 +28,15 @@ class PetShow extends Component {
     this.setState({pet: this.props.pet})
     this.setState({isEditing: !this.state.isEditing})
     }
+
+  toggleDeleteConfirmation = event => {
+    this.setState({pet: this.props.pet})
+    this.setState({confirmDelete: true})
+  }
+
+  handleDeletePet = event => {
+    this.props.deletePet(this.state.pet.id)
+  }
 
   updatePetState = event => {
     const field = event.target.name;
@@ -143,23 +154,42 @@ class PetShow extends Component {
             placeHolder="Age"
             menuItems={ages}
           />
+        <TextField
+          name="contact_phone" hintText="Contact Phone"
+          value={statePet.contact_phone}
+          onChange={this.updatePetState} />
         <RaisedButton type="button" onClick={this.handleSubmit} label="Update Pet" />
       </form>
     </div>
       )
+    } else if (this.state.confirmDelete) {
+      return (
+        <div>
+        <h1>Are You Sure You Want To Do That?</h1>
+        <br /> <br /> <br /> <br />
+        <div><RaisedButton type="button" onClick={this.toggleDeleteConfirmation} label="NO!!" /></div>
+        <br /><br /><br /> <br /> <br /> <br /> <br />
+        <span><RaisedButton type="button" onClick={this.handleDeletePet} label="yes" /></span>
+        </div>
+      )
     }
     return (
       <div key={pet.id}>
-          <div>{pet.name}</div>
-          <div>{pet.age}</div>
-          <div>{pet.contact_phone}</div>
-          <div>{pet.pet_type}</div>
-          <div>{pet.primary_breed}</div>
-          <div>{pet.primary_color}</div>
-          <div>{pet.status}</div>
-          <div>{pet.address_string}</div>
-          <button onClick={this.toggleEdit}>Edit Pet</button>
-        </div>
+      <Card>
+        <CardText>
+          <p>Name: {pet.name}</p>
+          <p>Age: {pet.age}</p>
+          <p>Pet Type: {pet.pet_type}</p>
+          <p>Primary Breed: {pet.primary_breed}</p>
+          <p>Primary Color: {pet.primary_color}</p>
+          <p>Status: {pet.status}</p>
+          <p>Reported At: {pet.address_string}</p>
+          <p>Contact Phone: {pet.contact_phone}</p>
+        </CardText>
+          <span><RaisedButton type="button" onClick={this.toggleEdit} label="Edit Pet" /></span>
+          <span><RaisedButton type="button" onClick={this.toggleDeleteConfirmation} label="Delete Pet" /></span>
+      </Card>
+      </div>
     )
   }
 }
@@ -174,7 +204,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     findPet: findPet,
-    updatePet: updatePet
+    updatePet: updatePet,
+    deletePet: deletePet
   }, dispatch);
 };
 

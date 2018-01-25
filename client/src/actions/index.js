@@ -42,7 +42,9 @@ export function deletePet(pet_id) {
       }
     }).then(response => response.json())
     .then(pets => {
-    dispatch({type: 'FETCH_PETS', payload: pets })})
+    dispatch({type: 'FETCH_PETS', payload: pets })
+    window.location.assign(`/`)
+  })
     .catch((error) => {
         throw(error);
     })

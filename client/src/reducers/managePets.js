@@ -7,7 +7,8 @@ const formState = {
   pet_type: '',
   primary_breed: '',
   primary_color: '',
-  age: ''
+  age: '',
+  contact_phone: ''
 }
 
 const breeds = {

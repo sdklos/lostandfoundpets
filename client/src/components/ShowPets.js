@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import '../App.css';
+import Paper from 'material-ui/Paper';
 
 export default class ShowPets extends React.Component {
 
@@ -8,17 +9,16 @@ export default class ShowPets extends React.Component {
 
   const DisplayPets = this.props.pets.map(pet => {
       return (
+        <Paper>
         <div className="item-1" key={pet.id}>
           <NavLink to={`/pets/${pet.id}`}>View {pet.name}</NavLink>
-          <div>{pet.age}</div>
-          <div>{pet.contact_phone}</div>
-          <div>{pet.owner_name}</div>
-          <div>{pet.pet_type}</div>
-          <div>{pet.primary_breed}</div>
-          <div>{pet.primary_color}</div>
-          <div>{pet.sex}</div>
-          <div>{pet.address_string}</div>
+          <p>
+            {pet.name} is a {pet.primary_color} {pet.primary_breed} ({pet.pet_type})
+          </p>
+          <p> Reported {pet.status} at {pet.address_string}
+          </p>
         </div>
+        </Paper>
       )
     })
 
