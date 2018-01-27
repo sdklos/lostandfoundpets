@@ -109,8 +109,6 @@ export function findPet(id) {
 }
 
 export function submitLocationQuery(queryParams) {
-  const address = queryParams.address
-  const radius = queryParams.radius
   return(dispatch) => {
     dispatch({ type: 'LOADING_PETS' });
     return fetch(`/pets/query?address=${queryParams.address}&radius=${queryParams.radius}.json`)
@@ -164,5 +162,29 @@ export function removeFilter() {
 export function clearFormState() {
   return {
     type: 'CLEAR_FORM_STATE'
+  }
+}
+
+export function setEditingState() {
+  return {
+    type: 'SET_EDITING_STATE'
+  }
+}
+
+export function confirmDelete() {
+  return {
+    type: 'CONFIRM_DELETE'
+  }
+}
+
+export function rejectDelete() {
+  return {
+    type: 'REJECT_DELETE'
+  }
+}
+
+export function removeEditingState() {
+  return {
+    type: 'REMOVE_EDITING_STATE'
   }
 }

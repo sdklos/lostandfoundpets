@@ -27,7 +27,6 @@ class SearchByLocation extends Component {
 
     const defaultStyles = {
       autocompleteContainer: {
-        border: 'none',
         border: '1px solid #555555',
       },
       autocompleteItem: {

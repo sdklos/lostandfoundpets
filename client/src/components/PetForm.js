@@ -27,6 +27,10 @@ export default class PetForm extends Component {
     this.props.setFormState(addressChange)
   }
 
+  toggleEditing = event => {
+    this.props.removeEditingState()
+  }
+
   populateBreeds = (pet_type) => {
     switch(pet_type) {
       case "Dog":
@@ -71,7 +75,7 @@ export default class PetForm extends Component {
 
     return (
       <div>
-        <h3>Add Your Pet Here:</h3>
+        <h3>{this.props.template === "new" ? 'Add' : 'Edit'} Your Pet Here:</h3>
       <div className="input">
         <SearchByLocation
           handleChange={this.handleAddressChange}
@@ -89,8 +93,11 @@ export default class PetForm extends Component {
           <StatusDropDown value={this.props.formState.age} name="age" setFormState={this.props.setFormState} placeHolder="Age" menuItems={ages} />
           <TextField name="contact_phone" hintText="Contact Phone" value={this.props.formState.contact_phone} onChange={this.handleChange} />
         <div className="input">
-          <RaisedButton type="submit" onClick={this.handleSubmit} label="Submit Pet" />
+          <RaisedButton type="button" onClick={this.handleSubmit} label="Submit Pet" />
         </div>
+        {this.props.template === 'edit' ?
+          <RaisedButton type="button" onClick={this.toggleEditing} label="Discard Edits" /> : ''
+        }
       </form>
     </div>
     )

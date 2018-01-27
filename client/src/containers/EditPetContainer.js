@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PetForm from '../components/PetForm.js';
-import { updatePet, setFormState, findPet } from '../actions/index';
+import { updatePet, setFormState, findPet, removeEditingState } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import { BrowserRouter as Router, Route, NavLink, Switch } from 'react-router-dom';
 
@@ -23,9 +23,9 @@ class EditPetContainer extends Component {
       template="edit"
       formState={this.props.formState}
       setFormState={this.props.setFormState}
-      addPet={this.props.addPet}
       breeds={this.props.breeds}
       submitPet={this.props.updatePet}
+      removeEditingState={this.props.removeEditingState}
        />
   )}
 }
@@ -43,7 +43,8 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     updatePet: updatePet,
     findPet: findPet,
-    setFormState: setFormState
+    setFormState: setFormState,
+    removeEditingState: removeEditingState
   }, dispatch);
 };
 

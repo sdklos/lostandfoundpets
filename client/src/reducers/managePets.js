@@ -27,10 +27,13 @@ const activePet = {
   primary_breed: '',
   primary_color: '',
   age: '',
-  contact_phone: ''
+  contact_phone: '',
+
 }
 
 const initialState = {
+  isEditing: false,
+  confirmingDelete: false,
   filtering: false,
   loading: false,
   pets: [],
@@ -69,8 +72,20 @@ export default function managePets(state = initialState, action) {
       return newBreedsState
     case 'LOADING':
       return Object.assign({}, state, {loading: true});
+    case 'SET_EDITING_STATE':
+      const editingState =  Object.assign({}, state, {isEditing: true})
+      return editingState
+    case 'REMOVE_EDITING_STATE':
+      const noEditingState = Object.assign({}, state, {isEditing: false})
+      return noEditingState
+    case 'CONFIRM_DELETE':
+      const deletingState = Object.assign({}, state, {confirmingDelete: true})
+      return deletingState
+    case 'REJECT_DELETE':
+      const notDeletingState = Object.assign({}, state, {confirmingDelete: false})
+      return notDeletingState
     case 'FETCH_PETS':
-      const fetchPetsState = Object.assign({}, state, {loading: false, filtering: false, pets: action.payload})
+      const fetchPetsState = Object.assign({}, state, {loading: false, filtering: false, isEditing: false, confirmingDelete: false, pets: action.payload})
       return fetchPetsState;
     case 'QUERY_PETS':
       const filteredPetsState = Object.assign({}, state, {loading: false, filtering: true, filtered_pets: action.payload})
