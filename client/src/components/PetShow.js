@@ -7,9 +7,6 @@ import {Card, CardText} from 'material-ui/Card';
 import EditPetContainer from '../containers/EditPetContainer';
 
 class PetShow extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   componentDidMount(){
     this.props.findPet(this.props.match.params.id)

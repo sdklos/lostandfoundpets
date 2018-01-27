@@ -3,7 +3,6 @@ import PetForm from '../components/PetForm.js';
 import { bindActionCreators } from 'redux';
 import { addPet, setFormState, clearFormState } from '../actions/index';
 import { connect } from 'react-redux';
-import SearchByLocation from '../components/SearchByLocation.js';
 
 class NewPetContainer extends Component {
 

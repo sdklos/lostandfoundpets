@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import PetForm from '../components/PetForm.js';
 import { updatePet, setFormState, findPet, removeEditingState } from '../actions/index';
 import { bindActionCreators } from 'redux';
-import { BrowserRouter as Router, Route, NavLink, Switch } from 'react-router-dom';
 
 class EditPetContainer extends Component {
 
