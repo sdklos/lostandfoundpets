@@ -1,29 +1,50 @@
 import React, { Component } from 'react';
-import EditPetForm from '../components/EditPetForm.js';
 import { connect } from 'react-redux';
+import PetForm from '../components/PetForm.js';
+import { updatePet, setFormState, findPet } from '../actions/index';
+import { bindActionCreators } from 'redux';
+import { BrowserRouter as Router, Route, NavLink, Switch } from 'react-router-dom';
 
 class EditPetContainer extends Component {
 
-  constructor(props) {
-    super(props)
-    this.props.findPetToEdit(this.props.match.params.id)
+  componentDidMount(){
+    this.props.findPet(this.props.match.params.id)
+    this.populateFormState(this.props.pet)
   }
 
-  populateForm = () => {
-    debugger
+  populateFormState = (pet) => {
+    this.props.setFormState(pet)
   }
 
   render() {
 
   return (
-    <EditPetForm template="editing" pet={this.props.pet} />
+    <PetForm
+      template="edit"
+      formState={this.props.formState}
+      setFormState={this.props.setFormState}
+      addPet={this.props.addPet}
+      breeds={this.props.breeds}
+      submitPet={this.props.updatePet}
+       />
   )}
 }
 
 const mapStateToProps = state => {
   return {
-    pet: state.activePet
+    pet: state.activePet,
+    formState: state.formState,
+    breeds: state.breeds,
+    isLoading: state.loading
   };
 }
 
-export default connect(mapStateToProps)(EditPetContainer)
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    updatePet: updatePet,
+    findPet: findPet,
+    setFormState: setFormState
+  }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditPetContainer)

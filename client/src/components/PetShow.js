@@ -9,6 +9,7 @@ import DynamicStatusDropDown from './DynamicStatusDropDown.js';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import EditPetContainer from '../containers/EditPetContainer';
 
 class PetShow extends Component {
   constructor(props) {
@@ -104,64 +105,8 @@ class PetShow extends Component {
     const petTypeMenuItems = ["Dog", "Cat", "Bird"]
     const ages = ["Baby", "Young", "Adult", "Senior"]
 
-
     if (this.state.isEditing) {
-      return (
-        <div>
-        <h3>Edit Your Pet Here:</h3>
-        <SearchByLocation
-          handleChange={this.updatePetAddressState}
-          value={statePet.address_string}
-          placeholder="Address" />
-        <form>
-          <StatusDropDown
-            value={statePet.status}
-            name="status"
-            setFormState={this.updateDropdownState.bind(this)}
-            placeHolder="Status"
-            menuItems={statusMenuItems}/>
-          <TextField
-            name="name" hintText="Pet Name"
-            value={statePet.name}
-            onChange={this.updatePetState} />
-          <StatusDropDown
-            value={statePet.pet_type}
-            name="pet_type"
-            setFormState={this.updateDropdownState}
-            placeHolder="Pet Type"
-            menuItems={petTypeMenuItems} />
-          <DynamicStatusDropDown
-            value={statePet.primary_breed}
-            name="primary_breed"
-            setFormState={this.updateDropdownState}
-            placeHolder="Primary Breed"
-            menuItems={this.populateBreeds(statePet.pet_type)}
-            populateMenu={this.populateBreeds}
-            pet_type={statePet.pet_type}
-          />
-          <DynamicStatusDropDown
-            value={statePet.primary_color}
-            name="primary_color"
-            setFormState={this.updateDropdownState}
-            placeHolder="Primary Color"
-            menuItems={this.populateColors(statePet.pet_type)}
-            populateMenu={this.populateColors}
-            pet_type={statePet.pet_type} />
-          <StatusDropDown
-            value={statePet.age}
-            name="age"
-            setFormState={this.updateDropdownState}
-            placeHolder="Age"
-            menuItems={ages}
-          />
-        <TextField
-          name="contact_phone" hintText="Contact Phone"
-          value={statePet.contact_phone}
-          onChange={this.updatePetState} />
-        <RaisedButton type="button" onClick={this.handleSubmit} label="Update Pet" />
-      </form>
-    </div>
-      )
+      return (<EditPetContainer match={this.props.match}/>)
     } else if (this.state.confirmDelete) {
       return (
         <div>
@@ -183,7 +128,7 @@ class PetShow extends Component {
           <p>Primary Breed: {pet.primary_breed}</p>
           <p>Primary Color: {pet.primary_color}</p>
           <p>Status: {pet.status}</p>
-          <p>Reported At: {pet.address.address}</p>
+          <p>Reported At: {pet.address_string}</p>
           <p>Contact Phone: {pet.contact_phone}</p>
         </CardText>
           <span><RaisedButton type="button" onClick={this.toggleEdit} label="Edit Pet" /></span>

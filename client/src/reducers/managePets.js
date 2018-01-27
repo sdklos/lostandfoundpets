@@ -1,8 +1,7 @@
 const formState = {
+  id: null,
   status: '',
-  address_attributes: {
-    address: ''
-  },
+  address_string: '',
   name: '',
   pet_type: '',
   primary_breed: '',
@@ -93,6 +92,18 @@ export default function managePets(state = initialState, action) {
       const newFormState = Object.assign({}, state.formState, formChange)
       const setFormState = Object.assign({}, state, {formState: newFormState})
       return setFormState
+    case 'CLEAR_FORM_STATE':
+      const clearedFormState = { id: null,
+        status: '',
+        address_string: '',
+        name: '',
+        pet_type: '',
+        primary_breed: '',
+        primary_color: '',
+        age: '',
+        contact_phone: ''}
+      const stateWithClearedFormState = Object.assign({}, state, { formState: clearedFormState })
+      return stateWithClearedFormState
     case 'SET_PET_TYPE_FILTER':
       const petTypeChange = action.payload
       const newFilterState = Object.assign({}, state.filters, petTypeChange)

@@ -3,11 +3,9 @@ import PlacesAutocomplete from 'react-places-autocomplete';
 import '../App.css';
 
 class SearchByLocation extends Component {
-  constructor(props) {
-    super(props)
-    this.onChange = (payload) => this.props.handleChange(payload)
 
-  }
+  onChange = (payload) => this.props.handleChange(payload)
+
 
   render() {
     const inputProps = {

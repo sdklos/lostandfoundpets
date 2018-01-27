@@ -72,7 +72,7 @@ export function updatePet(pet, id) {
   }
 };
 
-export function addPet(pet) {
+export function addPet(pet, id) {
   return (dispatch) => {
     dispatch({ type: 'LOADING'})
   return fetch('/pets', {
@@ -120,14 +120,6 @@ export function submitLocationQuery(queryParams) {
   };
 }
 
-export const filterPetsAction = () => {
-
-  return {
-    type: 'FILTER_PETS',
-    // filtered_pets
-  }
-}
-
 export function updateAddress(address) {
   return {
     type: 'UPDATE_ADDRESS',
@@ -166,5 +158,11 @@ export function setPrimaryBreedFilter(filterState) {
 export function removeFilter() {
   return {
     type: 'REMOVE_FILTER'
+  }
+}
+
+export function clearFormState() {
+  return {
+    type: 'CLEAR_FORM_STATE'
   }
 }

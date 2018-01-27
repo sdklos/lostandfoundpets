@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { addPet, setFormState } from '../actions/index';
-import { connect } from 'react-redux';
 import SearchByLocation from '../components/SearchByLocation.js';
 import StatusDropDown from './StatusDropDown.js';
 import DynamicStatusDropDown from './DynamicStatusDropDown.js';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
-class PetForm extends Component {
+export default class PetForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
     const pet = {pet: this.props.formState}
-    this.props.addPet(pet)
+    pet['pet']['address_attributes'] = {}
+    pet['pet']['address_attributes']['address'] = this.props.formState.address_string
+    this.props.submitPet(pet, pet.pet.id)
   }
 
   handleChange = event => {
@@ -23,8 +22,8 @@ class PetForm extends Component {
   }
 
   handleAddressChange = address => {
-    var addressChange = {address_attributes: {address: ''}}
-    addressChange['address_attributes']['address'] = address
+    var addressChange = {address_string: ''}
+    addressChange['address_string'] = address
     this.props.setFormState(addressChange)
   }
 
@@ -66,13 +65,17 @@ class PetForm extends Component {
     const petTypeMenuItems = ["Dog", "Cat", "Bird"]
     const ages = ["Baby", "Young", "Adult", "Senior"]
 
+    if (this.props.isLoading === true) {
+      return (<h1>Please Wait While The Data Is Loaded</h1>)
+    }
+
     return (
       <div>
         <h3>Add Your Pet Here:</h3>
       <div className="input">
         <SearchByLocation
           handleChange={this.handleAddressChange}
-          value={this.props.formState.address_attributes.address}
+          value={this.props.formState.address_string}
           placeholder="Address" />
       </div>
         <form className="input" onSubmit={this.handleSubmit}>
@@ -86,7 +89,7 @@ class PetForm extends Component {
           <StatusDropDown value={this.props.formState.age} name="age" setFormState={this.props.setFormState} placeHolder="Age" menuItems={ages} />
           <TextField name="contact_phone" hintText="Contact Phone" value={this.props.formState.contact_phone} onChange={this.handleChange} />
         <div className="input">
-          <RaisedButton type="submit" label="Submit Pet" />
+          <RaisedButton type="submit" onClick={this.handleSubmit} label="Submit Pet" />
         </div>
       </form>
     </div>
@@ -94,19 +97,3 @@ class PetForm extends Component {
   }
 
 }
-
-const mapStateToProps = state => {
-  return {
-    formState: state.formState,
-    breeds: state.breeds,
-    activePet: state.active
-  }
-}
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
-    addPet: addPet,
-    setFormState: setFormState
-  }, dispatch);
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(PetForm);

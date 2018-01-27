@@ -48,8 +48,9 @@ class PetsContainer extends Component {
     const petTypeMenuItems = ["Dog", "Cat", "Bird"]
 
     function ConditionalRender(props) {
-      const isFiltering = props.isFiltering
-      if (isFiltering === true) {
+      if (props.isLoading) {
+        return (<h1>Please Wait</h1>)
+      } else if (props.isFiltering) {
         return <ShowPets pets={props.filtered_pets} />
       } else {
         return <ShowPets pets={props.pets} />
@@ -115,7 +116,8 @@ const mapStateToProps = state => {
     queryParams: state.queryParams,
     isFiltering: state.filtering,
     filters: state.filters,
-    breeds: state.breeds
+    breeds: state.breeds,
+    isLoading: state.loading
   };
 }
 
