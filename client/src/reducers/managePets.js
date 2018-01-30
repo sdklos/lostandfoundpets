@@ -34,10 +34,8 @@ const activePet = {
 const initialState = {
   isEditing: false,
   confirmingDelete: false,
-  filtering: false,
   loading: false,
   pets: [],
-  filtered_pets: [],
   queryParams: {
     address: '',
     radius: 15
@@ -62,7 +60,7 @@ export default function managePets(state = initialState, action) {
     case 'REMOVE_FILTER':
       const noFilters = Object.assign({}, state.filters, {pet_type: '', primary_breed: ''})
       const noParams = Object.assign({}, state.queryParams, {address: '', radius: 15})
-      const noFilterState = Object.assign({}, state, {filtering: false, filters: noFilters, queryParams: noParams})
+      const noFilterState = Object.assign({}, state, {filters: noFilters, queryParams: noParams})
       return noFilterState
     case 'FETCH_BREEDS':
       const breeds = {}
@@ -122,14 +120,12 @@ export default function managePets(state = initialState, action) {
     case 'SET_PET_TYPE_FILTER':
       const petTypeChange = action.payload
       const newFilterState = Object.assign({}, state.filters, petTypeChange)
-      const filteredTypePets = state.pets.filter(pet => pet.pet_type === newFilterState.pet_type)
-      const setFilterState = Object.assign({}, state, {filters: newFilterState, filtered_pets: filteredTypePets, filtering: true})
+      const setFilterState = Object.assign({}, state, {filters: newFilterState})
       return setFilterState
       case 'SET_PRIMARY_BREED_FILTER':
         const primaryBreedChange = action.payload
         const newNestedFilterState = Object.assign({}, state.filters, primaryBreedChange)
-        const filteredBreedPets = state.pets.filter(pet => pet.primary_breed === newNestedFilterState.primary_breed)
-        const setNestedFilterState = Object.assign({}, state, {filters: newNestedFilterState, filtered_pets: filteredBreedPets, filtering: true})
+        const setNestedFilterState = Object.assign({}, state, {filters: newNestedFilterState})
         return setNestedFilterState
     default:
       return state;

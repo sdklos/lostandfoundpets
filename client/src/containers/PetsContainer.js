@@ -19,6 +19,10 @@ class PetsContainer extends Component {
     this.props.fetchPets()
   }
 
+  componentWillUpdate(nextProps) {
+    this.filterPetsForDisplay(nextProps)
+  }
+
   handleLocation = event => {
     this.props.submitLocationQuery(this.props.queryParams)
   }
@@ -45,8 +49,26 @@ class PetsContainer extends Component {
     }
   }
 
+  filterPetsForDisplay = (props) => {
+    if (props.filters.pet_type !== "") {
+      if (props.filters.primary_breed !== "") {
+        const petsForDisplay = props.pets.filter(pet => pet.primary_breed === props.filters.primary_breed)
+        return petsForDisplay
+        } else {
+          const petsForDisplay = props.pets.filter(pet => pet.pet_type === props.filters.pet_type)
+          return petsForDisplay
+        }
+      } else {
+        const petsForDisplay = props.pets
+        return petsForDisplay
+      }
+  }
+
+
   render() {
     const petTypeMenuItems = ["Dog", "Cat", "Bird"]
+
+    const petsForDisplay = this.filterPetsForDisplay(this.props)
 
     return (
       <div>
@@ -96,9 +118,7 @@ class PetsContainer extends Component {
           <RaisedButton label="View All Pets"
             onClick={this.handleRemoveFilter} />
         <ConditionalRender
-            isFiltering={this.props.isFiltering}
-            pets={this.props.pets}
-            filtered_pets={this.props.filtered_pets}
+            pets={petsForDisplay}
         />
       </div>
     )}
@@ -109,7 +129,6 @@ const mapStateToProps = state => {
     pets: state.pets,
     filtered_pets: state.filtered_pets,
     queryParams: state.queryParams,
-    isFiltering: state.filtering,
     filters: state.filters,
     breeds: state.breeds,
     isLoading: state.loading

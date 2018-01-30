@@ -142,7 +142,7 @@ export function setFormState(formState) {
 export function setPetTypeFilter(filterState) {
   return {
     type: 'SET_PET_TYPE_FILTER',
-    payload: filterState
+    payload: Object.assign({}, filterState, {primary_breed: ""})
   }
 }
 
