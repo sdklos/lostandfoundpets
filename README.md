@@ -5,9 +5,23 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+Ruby v2.3
+Rails v5.1
+Node v5.6
 
-* System dependencies
+React Dependencies:
+  "material-ui": "^0.20.0",
+  "react-places-autocomplete": "^5.4.3",
+  "redux-form": "^7.2.0"
+
+Rails Dependencies:
+  gem 'geocoder'
+  gem 'petfinder'
+  gem 'active_model_serializers'
+  gem 'foreman'
+  gem 'faker'
+  gem 'random-location'
+
 
 * Configuration
 

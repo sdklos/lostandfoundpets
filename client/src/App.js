@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, NavLink, Switch } from 'react-router-do
 import EditPetContainer from './containers/EditPetContainer'
 import NewPetContainer from './containers/NewPetContainer'
 import PetsContainer from './containers/PetsContainer';
-import PetShow from './components/PetShow';
+import PetContainer from './containers/PetContainer';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 export default class App extends Component {
@@ -27,7 +27,7 @@ export default class App extends Component {
           <Switch>
             <Route exact path="/" component={PetsContainer} />
             <Route exact path="/add" component={NewPetContainer} />
-            <Route exact path="/pets/:id" component={PetShow} />
+            <Route exact path="/pets/:id" component={PetContainer} />
             <Route exact path="/pets/:id/edit" component={EditPetContainer} />
           </Switch>
         </div>

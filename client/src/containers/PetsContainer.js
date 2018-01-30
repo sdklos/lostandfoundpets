@@ -3,12 +3,12 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { fetchPets, updateAddress, updateRadius, submitLocationQuery, removeFilter, setPrimaryBreedFilter, setPetTypeFilter } from '../actions/index';
 import SearchByLocation from '../components/SearchByLocation.js'
-import ShowPets from '../components/ShowPets.js'
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import StatusDropDown from '../components/StatusDropDown.js';
 import DynamicStatusDropDown from '../components/DynamicStatusDropDown.js';
 import '../App.css';
+import { ConditionalRender } from '../components/PresentationalFunctions.js'
 
 
 class PetsContainer extends Component {
@@ -46,16 +46,6 @@ class PetsContainer extends Component {
 
   render() {
     const petTypeMenuItems = ["Dog", "Cat", "Bird"]
-
-    function ConditionalRender(props) {
-      if (props.isLoading) {
-        return (<h1>Please Wait</h1>)
-      } else if (props.isFiltering) {
-        return <ShowPets pets={props.filtered_pets} />
-      } else {
-        return <ShowPets pets={props.pets} />
-    }
-  }
 
     return (
       <div>

@@ -4,6 +4,7 @@ import StatusDropDown from './StatusDropDown.js';
 import DynamicStatusDropDown from './DynamicStatusDropDown.js';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import { DataLoadingMessage } from '../components/PresentationalFunctions.js'
 
 export default class PetForm extends Component {
 
@@ -70,7 +71,7 @@ export default class PetForm extends Component {
     const ages = ["Baby", "Young", "Adult", "Senior"]
 
     if (this.props.isLoading === true) {
-      return (<h1>Please Wait While The Data Is Loaded</h1>)
+      return (<DataLoadingMessage />)
     }
 
     return (
@@ -83,24 +84,46 @@ export default class PetForm extends Component {
           placeholder="Address" />
       </div>
         <form className="input" onSubmit={this.handleSubmit}>
-          <StatusDropDown value={this.props.formState.status} name="status" setFormState={this.props.setFormState} placeHolder="Status" menuItems={statusMenuItems}/>
-          <TextField name="name" hintText="Pet Name" value={this.props.formState.name} onChange={this.handleChange} />
-          <StatusDropDown value={this.props.formState.pet_type} name="pet_type" setFormState={this.props.setFormState} placeHolder="Pet Type" menuItems={petTypeMenuItems} />
+          <StatusDropDown value={this.props.formState.status} name="status" setFormState={this.props.setFormState} placeHolder="Status" menuItems={statusMenuItems}
+          />
+          <TextField
+            name="name"
+            hintText="Pet Name"
+            value={this.props.formState.name}
+            onChange={this.handleChange}
+          />
+          <StatusDropDown value={this.props.formState.pet_type} name="pet_type" setFormState={this.props.setFormState} placeHolder="Pet Type" menuItems={petTypeMenuItems}
+          />
           <DynamicStatusDropDown value={this.props.formState.primary_breed} name="primary_breed" setFormState={this.props.setFormState} placeHolder="Primary Breed" menuItems={this.populateBreeds(this.props.formState.pet_type)}
               populateMenu={this.populateBreeds}
-            pet_type={this.props.formState.pet_type} />
-          <DynamicStatusDropDown value={this.props.formState.primary_color} name="primary_color" setFormState={this.props.setFormState} placeHolder="Primary Color" menuItems={this.populateColors(this.props.formState.pet_type)} populateMenu={this.populateColors} pet_type={this.props.formState.pet_type} />
-          <StatusDropDown value={this.props.formState.age} name="age" setFormState={this.props.setFormState} placeHolder="Age" menuItems={ages} />
-          <TextField name="contact_phone" hintText="Contact Phone" value={this.props.formState.contact_phone} onChange={this.handleChange} />
+            pet_type={this.props.formState.pet_type}
+          />
+          <DynamicStatusDropDown value={this.props.formState.primary_color} name="primary_color" setFormState={this.props.setFormState} placeHolder="Primary Color" menuItems={this.populateColors(this.props.formState.pet_type)} populateMenu={this.populateColors} pet_type={this.props.formState.pet_type}
+          />
+          <StatusDropDown value={this.props.formState.age} name="age" setFormState={this.props.setFormState} placeHolder="Age" menuItems={ages}
+          />
+          <TextField
+            name="contact_phone"
+            hintText="Contact Phone"
+            value={this.props.formState.contact_phone}
+            onChange={this.handleChange}
+          />
         <div className="input">
-          <RaisedButton type="button" onClick={this.handleSubmit} label="Submit Pet" />
+          <RaisedButton
+            type="button"
+            onClick={this.handleSubmit}
+            label="Submit Pet"
+          />
         </div>
         {this.props.template === 'edit' ?
-          <RaisedButton type="button" onClick={this.toggleEditing} label="Discard Edits" /> : ''
+          <RaisedButton
+            type="button"
+            onClick={this.toggleEditing}
+            label="Discard Edits"
+          /> : ''
         }
       </form>
     </div>
     )
   }
-
 }

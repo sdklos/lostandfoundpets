@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { findPet, updatePet, deletePet, setEditingState, confirmDelete, rejectDelete } from '../actions/index';
-import RaisedButton from 'material-ui/RaisedButton';
-import {Card, CardText} from 'material-ui/Card';
+
 import EditPetContainer from '../containers/EditPetContainer';
+
+import { ConfirmDelete, PetCard } from '../components/PresentationalFunctions.js'
 
 class PetShow extends Component {
 
@@ -17,7 +18,7 @@ class PetShow extends Component {
     this.props.setEditingState()
     }
 
-  ConfirmDelete = event => {
+  confirmDelete = event => {
     this.props.confirmDelete()
   }
 
@@ -31,38 +32,20 @@ class PetShow extends Component {
 
 
   render() {
-    const pet = this.props.pet
 
     if (this.props.isEditing) {
       return (<EditPetContainer match={this.props.match}/>)
     } else if (this.props.confirmingDelete) {
       return (
-        <div>
-        <h1>Are You Sure You Want To Do That?</h1>
-        <br /> <br /> <br /> <br />
-        <div><RaisedButton type="button" onClick={this.rejectDelete} label="NO!!" /></div>
-        <br /><br /><br /> <br /> <br /> <br /> <br />
-        <span><RaisedButton type="button" onClick={this.handleDeletePet} label="yes" /></span>
-        </div>
+        <ConfirmDelete onConfirm={this.handleDeletePet} onReject={this.rejectDelete} />
       )
     }
     return (
-      <div key={pet.id}>
-      <Card>
-        <CardText>
-          <p>Name: {pet.name}</p>
-          <p>Age: {pet.age}</p>
-          <p>Pet Type: {pet.pet_type}</p>
-          <p>Primary Breed: {pet.primary_breed}</p>
-          <p>Primary Color: {pet.primary_color}</p>
-          <p>Status: {pet.status}</p>
-          <p>Reported At: {pet.address_string}</p>
-          <p>Contact Phone: {pet.contact_phone}</p>
-        </CardText>
-          <span><RaisedButton type="button" onClick={this.toggleEdit} label="Edit Pet" /></span>
-          <span><RaisedButton type="button" onClick={this.ConfirmDelete} label="Delete Pet" /></span>
-      </Card>
-      </div>
+      <PetCard
+        pet={this.props.pet}
+        onClickEdit={this.toggleEdit}
+        onClickDelete={this.confirmDelete}
+     />
     )
   }
 }
