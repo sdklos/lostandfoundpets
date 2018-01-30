@@ -21,6 +21,10 @@ span:last-of-type{
   text-align: center;
 }
 
+.Instruction {
+  text-align: center;
+}
+
 .App-header {
   background-color: #ffff66;
   height: 150px;

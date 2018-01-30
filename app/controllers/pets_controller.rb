@@ -2,16 +2,12 @@ require 'pry'
 class PetsController < ApplicationController
   def index
     @pets = Pet.all
-    respond_to do |format|
-      format.json {render json: @pets, status: 200}
-    end
+    render json: @pets, status: 200
   end
 
   def query
     @pets = Pet.perform_query(params)
-    respond_to do |format|
-      format.json {render json: @pets, status: 200}
-    end
+    render json: @pets, status: 200
   end
 
   def show
@@ -45,9 +41,7 @@ class PetsController < ApplicationController
     @pet = Pet.find(params[:id])
     @pet.destroy
     @pets = Pet.all
-    respond_to do |format|
-      format.json {render json: @pets, status: 200}
-    end
+    render json: @pets, status: 200
   end
 
   private

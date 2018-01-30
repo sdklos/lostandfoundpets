@@ -13,6 +13,7 @@ export default class PetForm extends Component {
     const pet = {pet: this.props.formState}
     pet['pet']['address_attributes'] = {}
     pet['pet']['address_attributes']['address'] = this.props.formState.address_string
+    delete pet.pet.address_string
     this.props.submitPet(pet, pet.pet.id)
   }
 
@@ -76,7 +77,7 @@ export default class PetForm extends Component {
 
     return (
       <div>
-        <h3>{this.props.template === "new" ? 'Add' : 'Edit'} Your Pet Here:</h3>
+        <h3 className="Instruction">{this.props.template === "new" ? 'Add' : 'Edit'} Your Pet Here:</h3>
       <div className="input">
         <SearchByLocation
           handleChange={this.handleAddressChange}

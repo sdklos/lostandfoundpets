@@ -2,7 +2,7 @@ import fetch from 'isomorphic-fetch';
 
 export function fetchBreeds(pet_type) {
   return (dispatch) => {
-    return fetch(`/breeds/${pet_type}.json`)
+    return fetch(`/breeds/${pet_type}`)
     .then(response => response.json())
     .then(breeds => {
       dispatch({type: 'FETCH_BREEDS', payload: breeds, name: pet_type})
@@ -12,7 +12,7 @@ export function fetchBreeds(pet_type) {
 
 export function fetchDogBreeds() {
   return (dispatch) => {
-    return fetch('/breeds/dogs.json')
+    return fetch('/breeds/dogs')
     .then(response => response.json())
     .then(breeds => {
       dispatch({type: 'FETCH_DOG_BREEDS', payload: breeds})
@@ -23,7 +23,7 @@ export function fetchDogBreeds() {
 export function fetchPets() {
   return (dispatch) => {
     dispatch({ type: 'LOADING' });
-    return fetch('/pets.json')
+    return fetch('/pets')
     .then(response => response.json())
     .then(pets => {
     dispatch({type: 'FETCH_PETS', payload: pets })})
@@ -33,7 +33,7 @@ export function fetchPets() {
 export function deletePet(pet_id) {
   return (dispatch) => {
     dispatch({ type: 'LOADING' });
-    return fetch(`/pets/${pet_id}.json`, {
+    return fetch(`/pets/${pet_id}`, {
       method: "DELETE",
       body: JSON.stringify(pet_id),
       headers: {
@@ -111,7 +111,7 @@ export function findPet(id) {
 export function submitLocationQuery(queryParams) {
   return(dispatch) => {
     dispatch({ type: 'LOADING_PETS' });
-    return fetch(`/pets/query?address=${queryParams.address}&radius=${queryParams.radius}.json`)
+    return fetch(`/pets/query?address=${queryParams.address}"&radius=${queryParams.radius}`)
     .then(response => response.json())
     .then(pets => {
     dispatch({type: 'QUERY_PETS', payload: pets })})

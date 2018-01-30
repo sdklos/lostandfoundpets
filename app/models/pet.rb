@@ -1,6 +1,8 @@
 require 'pry'
 
 class Pet < ApplicationRecord
+  validates :pet_type, :primary_color, presence: true
+
   belongs_to :address, optional: true
 
   def address_attributes=(address_attributes)
@@ -20,7 +22,9 @@ class Pet < ApplicationRecord
   end
 
   def self.perform_query(params)
-    @pets = Pet.all.select {|pet| pet.address.is_near(params[:address], params[:radius])}
+    pets_with_addresses = Pet.all.select {|pet|
+        pet.address != nil}
+    @pets = pets_with_addresses.select {|pet| pet.address.is_near(params[:address], params[:radius])}
   end
 
 end

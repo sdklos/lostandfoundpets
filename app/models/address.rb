@@ -1,4 +1,7 @@
+require 'pry'
+
 class Address < ApplicationRecord
+  validates :address, presence: true
   has_many :pets
 
   geocoded_by :address
@@ -9,7 +12,13 @@ class Address < ApplicationRecord
 
 
   def is_near(address, radius)
-      self.distance_from(address) <= radius.to_i
+    if self.latitude && self.longitude
+      if self.distance_from(address) <= radius.to_i
+        return true
+      else
+        return false
+      end
+    end
   end
 
 end

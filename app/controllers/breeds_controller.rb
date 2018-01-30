@@ -1,20 +1,14 @@
 class BreedsController < ApplicationController
 
   def dogs
-    respond_to do |format|
-      format.json { render json: DogBreed.all.to_json  }
-    end
+    render json: DogBreed.all.to_json
   end
 
   def cats
-    respond_to do |format|
-      format.json { render json: CatBreed.all.to_json  }
-    end
+    render json: CatBreed.all.to_json
   end
 
   def birds
-    respond_to do |format|
-      format.json { render json: BirdBreed.all.to_json  }
-    end
+    render json: BirdBreed.all.to_json
   end
 end

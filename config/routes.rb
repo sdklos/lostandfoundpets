@@ -4,8 +4,8 @@ Rails.application.routes.draw do
 
   get 'pets/query', to: 'pets#query'
 
-  resources :addresses
-  resources :pets
+  resources :addresses, defaults: {format: :json}
+  resources :pets, defaults: {format: :json}
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 

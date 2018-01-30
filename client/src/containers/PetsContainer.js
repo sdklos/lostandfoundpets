@@ -9,6 +9,7 @@ import StatusDropDown from '../components/StatusDropDown.js';
 import DynamicStatusDropDown from '../components/DynamicStatusDropDown.js';
 import '../App.css';
 import { ConditionalRender } from '../components/PresentationalFunctions.js'
+import {Tabs, Tab} from 'material-ui/Tabs';
 
 
 class PetsContainer extends Component {
@@ -49,47 +50,51 @@ class PetsContainer extends Component {
 
     return (
       <div>
-        <h1>Search for Pets</h1>
-        <div className="container-2">
-          <StatusDropDown
-            className="item-1"
-            value={this.props.filters.pet_type}
-            name="pet_type"
-            setFormState={this.props.setPetTypeFilter}
-            placeHolder="Filter By Pet Type"
-            menuItems={petTypeMenuItems} />
-          <TextField
-            className="item-1"
-            name="radius"
-            floatingLabelText="Enter a radius in miles"
-            floatingLabelFixed={true}
-            value={this.props.queryParams.radius}
-            onChange={this.handleRadiusChange}
-          />
-          <DynamicStatusDropDown
-            className="item-1"
-            value={this.props.filters.primary_breed}
-            name="primary_breed"
-            setFormState={this.props.setPrimaryBreedFilter}
-            placeHolder="Filter By Primary Breed"
-            menuItems={this.populateBreeds(this.props.filters.pet_type)}
-            populateMenu={this.populateBreeds}
-            pet_type={this.props.filters.pet_type}
-          />
-        <SearchByLocation
-          className="item-1"
-          handleChange={this.props.updateAddress}
-          value={this.props.queryParams.address}
-          placeholder="Enter an Address to Search"/>
-        </div>
-        <div>
-        <span><RaisedButton label="Search By Location" onClick={this.handleLocation.bind(this)}/>
-        </span>
-        <span>
+        <h3 className="Instruction">Search for Pets</h3>
+        <Tabs onChange={this.handleRemoveFilter}>
+          <Tab label="Filter Pets">
+            <div className="input">
+              <StatusDropDown
+                value={this.props.filters.pet_type}
+                name="pet_type"
+                setFormState={this.props.setPetTypeFilter}
+                placeHolder="Filter By Pet Type"
+                menuItems={petTypeMenuItems} />
+                <DynamicStatusDropDown
+                  className="item-1"
+                  value={this.props.filters.primary_breed}
+                  name="primary_breed"
+                  setFormState={this.props.setPrimaryBreedFilter}
+                  placeHolder="Filter By Primary Breed"
+                  menuItems={this.populateBreeds(this.props.filters.pet_type)}
+                  populateMenu={this.populateBreeds}
+                  pet_type={this.props.filters.pet_type}
+                />
+              </div>
+            </Tab>
+            <Tab label="Search By Location">
+              <div className="input">
+                <TextField
+                  className="item-1"
+                  name="radius"
+                  floatingLabelText="Enter a radius in miles"
+                  floatingLabelFixed={true}
+                  value={this.props.queryParams.radius}
+                  onChange={this.handleRadiusChange}
+                />
+              <SearchByLocation
+                className="item-1"
+                handleChange={this.props.updateAddress}
+                value={this.props.queryParams.address}
+                placeholder="Enter an Address to Search"/>
+            </div>
+            <div className="input">
+              <RaisedButton label="Search By Location" onClick={this.handleLocation.bind(this)}/>
+            </div>
+          </Tab>
+        </Tabs>
           <RaisedButton label="View All Pets"
             onClick={this.handleRemoveFilter} />
-        </span>
-        </div>
         <ConditionalRender
             isFiltering={this.props.isFiltering}
             pets={this.props.pets}
