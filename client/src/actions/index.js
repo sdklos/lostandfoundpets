@@ -75,22 +75,27 @@ export function updatePet(pet, id) {
 export function addPet(pet, id) {
   return (dispatch) => {
     dispatch({ type: 'LOADING'})
-  return fetch('/pets', {
-    method: "POST",
-    body: JSON.stringify(pet),
-    headers: {
-      'Accept': 'application/json',
-      "Content-Type": "application/json"
-    }
-  }).then(response => response.json())
-    .then(pet => {
-    dispatch({type: 'SET_ACTIVE_PET', payload: pet })
-    window.location.assign(`/pets/${pet.id}`)
-  }).catch((error) => {
-      throw(error);
+    return fetch('/pets', {
+      method: "POST",
+      body: JSON.stringify(pet),
+      headers: {
+        'Accept': 'application/json',
+        "Content-Type": "application/json"
+      }
+    }).then(response => {
+      if (!response.ok) {throw response}
+      return response.json()
+    })
+      .then(pet => {
+      dispatch({type: 'SET_ACTIVE_PET', payload: pet })
+      window.location.assign(`/pets/${pet.id}`)
+    }).catch(error => {
+      error.text().then(errorMessage => {
+        console.log(errorMessage)
+      })
     })
   }
-};
+}
 
 export function findPet(id) {
   return (dispatch) => {

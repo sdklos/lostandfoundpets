@@ -16,15 +16,12 @@ class PetsController < ApplicationController
   end
 
   def create
-    @pet = Pet.create(pet_params)
-    render json: @pet
-    # respond_to do |format|
-    #   if @pet.save
-    #     render json: @pet, status: 200
-    #   else
-    #     render json: @pet.errors, status: unprocessable_entity
-    #   end
-    # end
+    @pet = Pet.new(pet_params)
+    if @pet.save
+      render json: @pet
+    else
+      render json: @pet.errors, status: :unprocessable_entity
+    end
   end
 
   def update

@@ -10,7 +10,8 @@ export default class PetForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    const pet = {pet: this.props.formState}
+    const formState = Object.assign({}, this.props.formState)
+    const pet = {pet: formState}
     pet['pet']['address_attributes'] = {}
     pet['pet']['address_attributes']['address'] = this.props.formState.address_string
     delete pet.pet.address_string
@@ -24,7 +25,7 @@ export default class PetForm extends Component {
   }
 
   handleAddressChange = address => {
-    var addressChange = {address_string: ''}
+    var addressChange = {}
     addressChange['address_string'] = address
     this.props.setFormState(addressChange)
   }
@@ -112,7 +113,7 @@ export default class PetForm extends Component {
         <div className="input">
           <RaisedButton
             type="button"
-            onClick={this.handleSubmit}
+            onClick={this.handleSubmit.bind(this)}
             label="Submit Pet"
           />
         </div>
