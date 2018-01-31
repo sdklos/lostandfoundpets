@@ -23,16 +23,19 @@ Rails Dependencies:
   gem 'random-location'
 
 
-* Configuration
+To run:
 
-* Database creation
+In your console
+clone the repository
+then change into the repository's directory
+change into the client directory and enter npm install
+then go up to the root directory of the repository
+enter bundle install
+then rake db:migrate
+for some fake data enter rake db:seed
+then enter rake start
 
-* Database initialization
+the app can be found on localhost:3000
+you can access the api at localhost:3001
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
