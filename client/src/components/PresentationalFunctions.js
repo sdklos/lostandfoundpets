@@ -41,7 +41,7 @@ const ShowPets = (props) => {
 
 export const ConditionalRender = (props) => {
   if (props.isLoading) {
-    return (<h1>Please Wait</h1>)
+    return (<DataLoadingMessage />)
   } else {
     return (
       <ShowPets pets={props.pets} />

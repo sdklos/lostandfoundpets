@@ -35,6 +35,7 @@ const initialState = {
   isEditing: false,
   confirmingDelete: false,
   loading: false,
+  loadingPets: false,
   pets: [],
   queryParams: {
     address: '',
@@ -70,6 +71,8 @@ export default function managePets(state = initialState, action) {
       return newBreedsState
     case 'LOADING':
       return Object.assign({}, state, {loading: true});
+    case 'LOADING_PETS':
+      return Object.assign({}, state, {loadingPets: true});
     case 'SET_EDITING_STATE':
       const editingState =  Object.assign({}, state, {isEditing: true})
       return editingState
@@ -83,10 +86,10 @@ export default function managePets(state = initialState, action) {
       const notDeletingState = Object.assign({}, state, {confirmingDelete: false})
       return notDeletingState
     case 'FETCH_PETS':
-      const fetchPetsState = Object.assign({}, state, {loading: false, filtering: false, isEditing: false, confirmingDelete: false, pets: action.payload})
+      const fetchPetsState = Object.assign({}, state, {loading: false, isEditing: false, confirmingDelete: false, pets: action.payload})
       return fetchPetsState;
     case 'QUERY_PETS':
-      const filteredPetsState = Object.assign({}, state, {pets: action.payload})
+      const filteredPetsState = Object.assign({}, state, {pets: action.payload, loadingPets: false})
       return filteredPetsState
     case 'UPDATE_ADDRESS':
       const addressQueryState = Object.assign({}, state.queryParams, {address: action.payload})

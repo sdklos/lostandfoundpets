@@ -8,7 +8,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import StatusDropDown from '../components/StatusDropDown.js';
 import DynamicStatusDropDown from '../components/DynamicStatusDropDown.js';
 import '../App.css';
-import { ConditionalRender } from '../components/PresentationalFunctions.js'
+import { ConditionalRender, DataLoadingMessage } from '../components/PresentationalFunctions.js'
 import {Tabs, Tab} from 'material-ui/Tabs';
 
 
@@ -69,6 +69,9 @@ class PetsContainer extends Component {
     const petTypeMenuItems = ["Dog", "Cat", "Bird"]
 
     const petsForDisplay = this.filterPetsForDisplay(this.props)
+    if (this.props.isLoadingPets) {
+      return (<DataLoadingMessage />)
+    }
 
     return (
       <div>
@@ -119,6 +122,7 @@ class PetsContainer extends Component {
             onClick={this.handleRemoveFilter} />
         <ConditionalRender
             pets={petsForDisplay}
+            isLoading={this.props.isLoading}
         />
       </div>
     )}
@@ -130,7 +134,8 @@ const mapStateToProps = state => {
     queryParams: state.queryParams,
     filters: state.filters,
     breeds: state.breeds,
-    isLoading: state.loading
+    isLoading: state.loading,
+    isLoadingPets: state.loadingPets
   };
 }
 
