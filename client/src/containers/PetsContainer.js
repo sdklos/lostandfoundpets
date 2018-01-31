@@ -127,7 +127,6 @@ class PetsContainer extends Component {
 const mapStateToProps = state => {
   return {
     pets: state.pets,
-    filtered_pets: state.filtered_pets,
     queryParams: state.queryParams,
     filters: state.filters,
     breeds: state.breeds,

@@ -86,7 +86,7 @@ export default function managePets(state = initialState, action) {
       const fetchPetsState = Object.assign({}, state, {loading: false, filtering: false, isEditing: false, confirmingDelete: false, pets: action.payload})
       return fetchPetsState;
     case 'QUERY_PETS':
-      const filteredPetsState = Object.assign({}, state, {loading: false, filtering: true, filtered_pets: action.payload})
+      const filteredPetsState = Object.assign({}, state, {pets: action.payload})
       return filteredPetsState
     case 'UPDATE_ADDRESS':
       const addressQueryState = Object.assign({}, state.queryParams, {address: action.payload})

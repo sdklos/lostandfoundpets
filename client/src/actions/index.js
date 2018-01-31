@@ -159,9 +159,14 @@ export function setPrimaryBreedFilter(filterState) {
 }
 
 export function removeFilter() {
-  return {
-    type: 'REMOVE_FILTER'
-  }
+  return (dispatch) => {
+    dispatch({ type: 'LOADING' });
+    return fetch('/pets')
+    .then(response => response.json())
+    .then(pets => {
+    dispatch({type: 'FETCH_PETS', payload: pets })})
+    .then(dispatch({type: 'REMOVE_FILTER'}))
+  };
 }
 
 export function clearFormState() {

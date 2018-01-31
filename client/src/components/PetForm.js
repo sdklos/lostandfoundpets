@@ -59,14 +59,6 @@ export default class PetForm extends Component {
     }
   }
 
-  addressPlaceholder = (pet) => {
-    if (pet.address.address !== undefined) {
-      return pet.address.address
-    } else {
-      return "Address"
-    }
-  }
-
   render() {
     const statusMenuItems = ["Lost", "Found"]
     const petTypeMenuItems = ["Dog", "Cat", "Bird"]
