@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { fetchPets, updateAddress, updateRadius, submitLocationQuery, removeFilter, setPrimaryBreedFilter, setPetTypeFilter } from '../actions/index';
-import SearchByLocation from '../components/SearchByLocation.js'
+import SearchByLocation from '../components/SearchByLocation.js';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import StatusDropDown from '../components/StatusDropDown.js';
 import DynamicStatusDropDown from '../components/DynamicStatusDropDown.js';
 import '../App.css';
-import { ConditionalRender, DataLoadingMessage } from '../components/PresentationalFunctions.js'
+import {  DataLoadingMessage, ShowPets } from '../components/PresentationalFunctions.js'
 import {Tabs, Tab} from 'material-ui/Tabs';
 
 
@@ -120,10 +120,7 @@ class PetsContainer extends Component {
         </Tabs>
           <RaisedButton label="View All Pets"
             onClick={this.handleRemoveFilter} />
-        <ConditionalRender
-            pets={petsForDisplay}
-            isLoading={this.props.isLoading}
-        />
+        <ShowPets pets={petsForDisplay} />
       </div>
     )}
 };

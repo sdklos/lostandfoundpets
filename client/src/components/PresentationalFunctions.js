@@ -26,7 +26,7 @@ const ShowPet = (props) => {
   )
 }
 
-const ShowPets = (props) => {
+export const ShowPets = (props) => {
   function displayPets() {
     return props.pets.map(pet => {
       return (<div key={pet.id} className="item-1"><ShowPet pet={pet} /></div>)
@@ -39,7 +39,7 @@ const ShowPets = (props) => {
 }
 
 
-export const ConditionalRender = (props) => {
+const ConditionalRender = (props) => {
   if (props.isLoading) {
     return (<DataLoadingMessage />)
   } else {
