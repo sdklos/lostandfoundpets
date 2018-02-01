@@ -34,7 +34,7 @@ class PetShow extends Component {
   render() {
 
     if (this.props.isEditing) {
-      return (<EditPetContainer match={this.props.match}/>)
+      return (<EditPetContainer match={this.props.match} pet={this.props.pet}/>)
     } else if (this.props.confirmingDelete) {
       return (
         <ConfirmDelete onConfirm={this.handleDeletePet} onReject={this.rejectDelete} />

@@ -10,16 +10,6 @@ export function fetchBreeds(pet_type) {
   }
 }
 
-export function fetchDogBreeds() {
-  return (dispatch) => {
-    return fetch('/breeds/dogs')
-    .then(response => response.json())
-    .then(breeds => {
-      dispatch({type: 'FETCH_DOG_BREEDS', payload: breeds})
-    })
-  }
-}
-
 export function fetchPets() {
   return (dispatch) => {
     dispatch({ type: 'LOADING' });
@@ -63,9 +53,7 @@ export function updatePet(pet, id) {
       }
     }).then(response => response.json())
     .then(pet => {
-    dispatch({type: 'SET_ACTIVE_PET', payload: pet })
-    console.log(pet);
-    window.location.assign(`/pets/${id}`)
+    dispatch({type: 'REMOVE_EDITING_STATE', payload: pet })
   }).catch((error) => {
       throw(error);
     })

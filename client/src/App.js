@@ -27,8 +27,7 @@ export default class App extends Component {
           <Switch>
             <Route exact path="/" component={PetsContainer} />
             <Route exact path="/add" component={NewPetContainer} />
-            <Route exact path="/pets/:id" component={PetContainer} />
-            <Route exact path="/pets/:id/edit" component={EditPetContainer} />
+            <Route path="/pets/:id" component={PetContainer} />
           </Switch>
         </div>
       </Router>

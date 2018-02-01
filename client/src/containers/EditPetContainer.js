@@ -7,7 +7,6 @@ import { bindActionCreators } from 'redux';
 class EditPetContainer extends Component {
 
   componentDidMount(){
-    this.props.findPet(this.props.match.params.id)
     this.populateFormState(this.props.pet)
   }
 
@@ -41,7 +40,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     updatePet: updatePet,
-    findPet: findPet,
     setFormState: setFormState,
     removeEditingState: removeEditingState
   }, dispatch);

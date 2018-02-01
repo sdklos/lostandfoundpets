@@ -4,18 +4,6 @@ import MenuItem from 'material-ui/MenuItem';
 
 export default class DynamicStatusDropDown extends Component {
 
-  shouldComponentUpdate(nextProps) {
-    if (nextProps.pet_type !== this.props.pet_type || nextProps.value !== this.props.value ) {
-      return true
-    } else {
-      return false
-    }
-  }
-
-  componentWillUpdate(nextProps) {
-    this.props.populateMenu(nextProps.pet_type)
-  }
-
   handleChange = (event, index, value) => {
     var change = {}
     change[this.props.name] = value

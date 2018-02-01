@@ -65,7 +65,7 @@ export default function managePets(state = initialState, action) {
       return noFilterState
     case 'FETCH_BREEDS':
       const breeds = {}
-      breeds[`${action.name}`] = mapBreeds(action.payload)
+      breeds[`${action.name}`] = Array.from(new Set(mapBreeds(action.payload)))
       const fetchBreedsState = Object.assign({}, state.breeds, breeds)
       const newBreedsState = Object.assign({}, state, {breeds: fetchBreedsState})
       return newBreedsState
@@ -77,7 +77,8 @@ export default function managePets(state = initialState, action) {
       const editingState =  Object.assign({}, state, {isEditing: true})
       return editingState
     case 'REMOVE_EDITING_STATE':
-      const noEditingState = Object.assign({}, state, {isEditing: false})
+      const updatedActivePet = action.payload
+      const noEditingState = Object.assign({}, state, {isEditing: false, loading: false, activePet: updatedActivePet})
       return noEditingState
     case 'CONFIRM_DELETE':
       const deletingState = Object.assign({}, state, {confirmingDelete: true})
