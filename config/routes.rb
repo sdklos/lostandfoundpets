@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: "welcome#welcome"
 
   get 'pets/query', to: 'pets#query'
+  patch 'pets/:id/increment', to: 'pets#increment'
 
   resources :addresses, defaults: {format: :json}
   resources :pets, defaults: {format: :json}

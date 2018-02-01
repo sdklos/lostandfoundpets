@@ -41,6 +41,12 @@ class PetsController < ApplicationController
     render json: @pets, status: 200
   end
 
+  def increment
+    @pet = Pet.find(params[:id])
+    @pet.increment!(:counter)
+    render json: @pet, status: 200
+  end
+
   private
 
   def pet_params

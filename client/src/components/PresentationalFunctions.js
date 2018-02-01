@@ -4,25 +4,11 @@ import { NavLink } from 'react-router-dom';
 import '../App.css';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
+import ShowPet from '../components/ShowPet.js'
 
 export const DataLoadingMessage = () => {
   return (
     <h1>Please Wait While The Data Is Loaded</h1>
-  )
-}
-
-const ShowPet = (props) => {
-  const pet = props.pet
-  return (
-    <Paper>
-      <NavLink to={`/pets/${pet.id}`}>View {pet.name}</NavLink>
-      <p>
-        {pet.name} is a {pet.primary_color} {pet.primary_breed} ({pet.pet_type})
-      </p>
-      <p>
-        Reported {pet.status} at {pet.address_string}
-      </p>
-    </Paper>
   )
 }
 

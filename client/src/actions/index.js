@@ -65,7 +65,7 @@ export function updatePet(pet, id) {
     .then(pet => {
     dispatch({type: 'SET_ACTIVE_PET', payload: pet })
     console.log(pet);
-    window.location.assign(`/pets/${id}`)
+    //window.location.assign(`/pets/${id}`)
   }).catch((error) => {
       throw(error);
     })
@@ -196,5 +196,24 @@ export function rejectDelete() {
 export function removeEditingState() {
   return {
     type: 'REMOVE_EDITING_STATE'
+  }
+}
+
+export function incrementCounter(id) {
+  return (dispatch) => {
+    dispatch({type: 'LOADING'})
+    return fetch(`/pets/${id}/increment`, {
+      method: "PATCH",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json())
+    .then(newCount => {
+    dispatch({type: 'UPDATE_COUNTER', payload: newCount })
+    console.log(newCount);
+  }).catch((error) => {
+      throw(error);
+    })
   }
 }

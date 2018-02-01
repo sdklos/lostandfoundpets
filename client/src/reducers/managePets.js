@@ -27,8 +27,7 @@ const activePet = {
   primary_breed: '',
   primary_color: '',
   age: '',
-  contact_phone: '',
-
+  contact_phone: ''
 }
 
 const initialState = {
@@ -101,7 +100,7 @@ export default function managePets(state = initialState, action) {
         return radiusUpdateState
     case 'SET_ACTIVE_PET':
       const activePet = action.payload
-      const activePetState = Object.assign({}, state, {loading: false, activePet: activePet})
+      const activePetState = Object.assign({}, state, {loading: false, activePet: activePet, isEditing: false})
       return activePetState
     case 'SET_FORM_STATE':
       const formChange = action.payload
@@ -130,6 +129,14 @@ export default function managePets(state = initialState, action) {
         const newNestedFilterState = Object.assign({}, state.filters, primaryBreedChange)
         const setNestedFilterState = Object.assign({}, state, {filters: newNestedFilterState})
         return setNestedFilterState
+      case 'UPDATE_COUNTER':
+        const incrementedPet = action.payload
+        const countedPet = state.pets.find(pet => pet.id === action.payload.id)
+        const petIndex = state.pets.indexOf(countedPet)
+        const countedPetState = state.pets.slice()
+        countedPetState[petIndex] = incrementedPet
+        const setCountedPetState = Object.assign({}, state, {pets: countedPetState})
+        return setCountedPetState
     default:
       return state;
   }

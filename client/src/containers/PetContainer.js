@@ -10,7 +10,7 @@ import { ConfirmDelete, PetCard } from '../components/PresentationalFunctions.js
 class PetShow extends Component {
 
   componentDidMount(){
-    this.props.findPet(this.props.match.params.id)
+    //this.props.findPet(this.props.match.params.id)
   }
 
 
