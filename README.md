@@ -2,9 +2,9 @@
 
 ## This is a website that helps people who have lost a pet and people who have found a pet find each other.
 
-#### Ruby v2.3
-#### Rails v5.1
-#### Node v5.6
+* ##### Ruby v2.3
+* ##### Rails v5.1
+* ##### Node v5.6
 
 ##### React Dependencies:
  * ###### "material-ui": "^0.20.0",
