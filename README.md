@@ -6,18 +6,18 @@
 #### Rails v5.1
 #### Node v5.6
 
-### React Dependencies:
-  ##### "material-ui": "^0.20.0",
-  ##### "react-places-autocomplete": "^5.4.3",
-  ##### "redux-form": "^7.2.0"
+##### React Dependencies:
+ * ###### "material-ui": "^0.20.0",
+ * ###### "react-places-autocomplete": "^5.4.3",
+ * ###### "redux-form": "^7.2.0"
 
-### Rails Dependencies:
- * ##### gem 'geocoder'
- * ##### gem 'petfinder'
- * ##### gem 'active_model_serializers'
- * ##### gem 'foreman'
- * ##### gem 'faker'
- * ##### gem 'random-location'
+##### Rails Dependencies:
+ * ###### gem 'geocoder'
+ * ###### gem 'petfinder'
+ * ###### gem 'active_model_serializers'
+ * ###### gem 'foreman'
+ * ###### gem 'faker'
+ * ###### gem 'random-location'
 
 
 #### To run:
