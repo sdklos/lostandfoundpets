@@ -1,0 +1,39 @@
+{
+  "name": "lostandfoundpets",
+  "version": "1.0.0",
+  "description": "## This is a website that helps people who have lost a pet and people who have found a pet find each other.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "dependencies": {
+    "foobar": "^1.1.0",
+    "material-ui": "^0.20.0",
+    "react": "^15.6.2",
+    "react-bootstrap": "^0.32.1",
+    "react-dom": "^15.6.2",
+    "react-places-autocomplete": "^5.4.3",
+    "react-redux": "^4.4.9",
+    "react-redux-form": "^1.16.8",
+    "redux": "^3.7.2",
+    "redux-form": "^7.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "build": "cd client && npm install && npm run build && cd ..",
+    "deploy": "cp -a client/build/. public/",
+    "postinstall": "npm run build && npm run deploy && echo 'Client built!'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sdklos/lostandfoundpets.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sdklos/lostandfoundpets/issues"
+  },
+  "homepage": "https://github.com/sdklos/lostandfoundpets#readme"
+}
