@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PetForm from '../components/PetForm.js';
-import { updatePet, setFormState, findPet, removeEditingState } from '../actions/index';
+import { updatePet, setFormState, findPet, revertChanges } from '../actions/index';
 import { bindActionCreators } from 'redux';
 
 class EditPetContainer extends Component {
@@ -23,7 +23,7 @@ class EditPetContainer extends Component {
       setFormState={this.props.setFormState}
       breeds={this.props.breeds}
       submitPet={this.props.updatePet}
-      removeEditingState={this.props.removeEditingState}
+      removeEditingState={this.props.revertChanges}
        />
   )}
 }
@@ -41,7 +41,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     updatePet: updatePet,
     setFormState: setFormState,
-    removeEditingState: removeEditingState
+    revertChanges: revertChanges
   }, dispatch);
 };
 

@@ -181,8 +181,8 @@ export function rejectDelete() {
   }
 }
 
-export function removeEditingState() {
+export function revertChanges() {
   return {
-    type: 'REMOVE_EDITING_STATE'
+    type: 'REVERT_CHANGES'
   }
 }

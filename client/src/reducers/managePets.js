@@ -80,6 +80,9 @@ export default function managePets(state = initialState, action) {
       const updatedActivePet = action.payload
       const noEditingState = Object.assign({}, state, {isEditing: false, loading: false, activePet: updatedActivePet})
       return noEditingState
+    case 'REVERT_CHANGES':
+      const revertedState = Object.assign({}, state, {isEditing: false, loading: false})
+      return revertedState
     case 'CONFIRM_DELETE':
       const deletingState = Object.assign({}, state, {confirmingDelete: true})
       return deletingState
